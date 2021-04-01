@@ -1,0 +1,81 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name: pre-commit-hooks
+
+email:
+  support: support@hadenlabs.com
+
+# Logo for this project
+#logo: docs/logo.png
+
+# License of this project
+license: 'LGPL-3.0'
+
+# Canonical GitHub repo
+github_repo: hadenlabs/pre-commit-hooks
+
+# Badges to display
+badges:
+  - name: GitHub tag (latest SemVer)
+    image: 'https://img.shields.io/github/v/tag/hadenlabs/pre-commit-hooks.svg?label=latest&sort=semver'
+    url: 'https://github.com/hadenlabs/pre-commit-hooks/releases'
+  - name: Lint
+    image: 'https://github.com/hadenlabs/pre-commit-hooks/actions/workflows/lint.yml/badge.svg?branch=develop'
+    url: 'https://github.com/hadenlabs/pre-commit-hooks/actions'
+  - name: 'Issues'
+    image: 'https://img.shields.io/github/issues/hadenlabs/pre-commit-hooks.svg'
+    url: 'https://github.com/hadenlabs/pre-commit-hooks/issues'
+  - name: 'Latest Release'
+    image: 'https://img.shields.io/github/release/hadenlabs/pre-commit-hooks.svg'
+    url: 'https://github.com/hadenlabs/pre-commit-hooks/releases'
+
+# Short description of this project
+description: |-
+  This repository is a collection of Git hooks to be used with the
+  [pre-commit](https://pre-commit.com/) framework.
+
+features:
+  - '[Terraform](https://github.com/terraform-linters/tflint)'
+  - '[Markdown](https://github.com/tcort/markdown-link-check)'
+
+installation:
+  - docs/installation/base.md
+  - docs/installation/osx.md
+  - docs/installation/linux.md
+
+todo:
+  - name: 'chore: implement hook gnu make'
+    url: 'https://github.com/hadenlabs/pre-commit-hooks/issues/2'
+  - name: 'chore: implement hook Go'
+    url: 'https://github.com/hadenlabs/pre-commit-hooks/issues/3'
+  - name: 'chore: implement hook Bash'
+    url: 'https://github.com/hadenlabs/pre-commit-hooks/issues/4'
+
+# How to use this project
+usage: |-
+
+  Create a `.pre-commit-config.yaml` inside your repositories and add the desired list of hooks.
+  Please see the [documentation](https://pre-commit.com/#usage) for further information.
+
+
+  ```yaml
+    repos:
+      - repo: https://github.com/mineiros-io/pre-commit-hooks
+        rev: <VERSION> # Check for the latest version: https://github.com/mineiros-io/pre-commit-hooks/releases
+        hooks:
+          - id: terraform-fmt
+          - id: terraform-validate
+          - id: tflint
+          - id: markdown-link-check
+  ```
+
+  Once you created the configuration file inside your repository, you must run `pre-commit install` to activate the hooks.
+  That's it, pre-commit will now listen for changes in your files and run the checks accordingly.
+
+examples:
+  - 'docs/examples/common.md'
