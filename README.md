@@ -22,14 +22,13 @@ This repository is a collection of Git hooks to be used with the [pre-commit](ht
 
 - [Terraform](https://github.com/terraform-linters/tflint)
 - [Markdown](https://github.com/tcort/markdown-link-check)
+- [Shellcheck](https://github.com/koalaman/shellcheck)
 
 ## To-do
 
 - [chore: implement hook gnu make](https://github.com/hadenlabs/pre-commit-hooks/issues/2)
 
 - [chore: implement hook Go](https://github.com/hadenlabs/pre-commit-hooks/issues/3)
-
-- [chore: implement hook Bash](https://github.com/hadenlabs/pre-commit-hooks/issues/4)
 
 ## Installation
 
