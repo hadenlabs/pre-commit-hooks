@@ -16,3 +16,131 @@
       .+\.terraform\/.*$|
     )$
   minimum_pre_commit_version: 0.15.0
+
+# Checkov specific hooks
+
+- id: checkov
+  name: Checkov
+  description: Runs checkov on Terraform templates.
+  entry: pre_commit_hooks/terraform/checkov.sh
+  language: python
+  pass_filenames: false
+  always_run: false
+  files: \.tf$
+  require_serial: true
+  exclude: >
+    (?x)^(
+      .+\.vendor\/.*$|
+      .+\.terraform\/.*$|
+    )$
+  minimum_pre_commit_version: 0.15.0
+
+# Terraform specific hooks
+
+- id: terraform_fmt
+  name: Terraform fmt
+  description: Rewrites all Terraform configuration files to a canonical format.
+  entry: pre_commit_hooks/terraform/terraform_fmt.sh
+  language: script
+  files: (\.tf|\.tfvars)$
+  exclude: >
+    (?x)^(
+      .+\.vendor\/.*$|
+      .+\.terraform\/.*$|
+    )$
+  minimum_pre_commit_version: 0.15.0
+
+- id: terraform_docs
+  name: Terraform docs
+  description: Inserts input and output documentation into README.md (using terraform-docs).
+  require_serial: true
+  entry: pre_commit_hooks/terraform/terraform_docs.sh
+  language: script
+  files: (\.tf)$
+  exclude: >
+    (?x)^(
+      .+\.vendor\/.*$|
+      .+\.terraform\/.*$|
+    )$
+  minimum_pre_commit_version: 0.15.0
+
+- id: terraform_docs_without_aggregate_type_defaults
+  name: Terraform docs (without aggregate type defaults)
+  description: Inserts input and output documentation into README.md (using terraform-docs). Identical to terraform_docs.
+  require_serial: true
+  entry: pre_commit_hooks/terraform/terraform_docs.sh
+  language: script
+  files: (\.tf)$
+  exclude: >
+    (?x)^(
+      .+\.vendor\/.*$|
+      .+\.terraform\/.*$|
+    )$
+  minimum_pre_commit_version: 0.15.0
+
+- id: terraform_docs_replace
+  name: Terraform docs (overwrite README.md)
+  description: Overwrite content of README.md with terraform-docs.
+  require_serial: true
+  entry: pre_commit_hooks/terraform/terraform_docs_replace
+  language: python
+  files: (\.tf)$
+  exclude: >
+    (?x)^(
+      .+\.vendor\/.*$|
+      .+\.terraform\/.*$|
+    )$
+  minimum_pre_commit_version: 0.15.0
+
+- id: terraform_validate
+  name: Terraform validate
+  description: Validates all Terraform configuration files.
+  require_serial: true
+  entry: pre_commit_hooks/terraform/terraform_validate.sh
+  language: script
+  files: (\.tf|\.tfvars)$
+  exclude: >
+    (?x)^(
+      .+\.vendor\/.*$|
+      .+\.terraform\/.*$|
+    )$
+  minimum_pre_commit_version: 0.15.0
+
+- id: terraform_tflint
+  name: Terraform validate with tflint
+  description: Validates all Terraform configuration files with TFLint.
+  entry: pre_commit_hooks/terraform/terraform_tflint.sh
+  language: script
+  files: (\.tf|\.tfvars)$
+  exclude: >
+    (?x)^(
+      .+\.vendor\/.*$|
+      .+\.terraform\/.*$|
+    )$
+  minimum_pre_commit_version: 0.15.0
+
+- id: terraform_tfsec
+  name: Terraform validate with tfsec
+  description: Static analysis of Terraform templates to spot potential security issues.
+  entry: pre_commit_hooks/terraform/terraform_tfsec.sh
+  language: script
+
+# Terragrunt specific hooks
+
+- id: terragrunt_fmt
+  name: Terragrunt fmt
+  description: Rewrites all Terragrunt configuration files to a canonical format.
+  entry: pre_commit_hooks/terragrunt/terragrunt_fmt.sh
+  language: script
+  files: (\.hcl)$
+  exclude: \.terraform\/.*$
+  minimum_pre_commit_version: 0.15.0
+
+- id: terragrunt_validate
+  name: Terragrunt validate
+  description: Validates all Terragrunt configuration files.
+  entry: pre_commit_hooks/terragrunt/terragrunt_validate.sh
+  language: script
+  files: (\.hcl)$
+  exclude: \.terraform\/.*$
+  minimum_pre_commit_version: 0.15.0
