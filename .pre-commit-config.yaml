@@ -78,21 +78,6 @@ repos:
       - id: blacken-docs
         additional_dependencies:
           - black
-  - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.48.0
-    hooks:
-      - id: terraform_docs
-      - id: terraform_tflint
-        args:
-          - '--args=--config=__GIT_WORKING_DIR__/.github/linters/.tflint.hcl'
-      - id: terragrunt_fmt
-      - id: terraform_fmt
-      - id: terraform_tfsec
-      - id: checkov
-  - repo: https://github.com/mineiros-io/pre-commit-hooks
-    rev: v0.2.2
-    hooks:
-      - id: markdown-link-check
   - repo: git://github.com/dnephin/pre-commit-golang
     rev: v0.3.5
     hooks:
@@ -119,6 +104,18 @@ repos:
           - '--ignore-path=.github/linters/.prettierignore'
         files: \.(js|jsx|json|ts|tsx|mjs|d.ts|md|yml|yaml|gql|graphql|mjml)$
         exclude: node_modules
+      - id: markdown-link-check
+        name: markdown-link-check
+        description: Markdown-link-check checks all of the hyperlinks in a markdown text to determine if they are alive or dead.
+        entry: pre_commit_hooks/markdown/markdown-link-check.sh
+        language: script
+        files: \.md$
+        args: []
+        exclude: >
+          (?x)^(
+            .+\.vendor\/.*$|
+            .+\.terraform\/.*$|
+          )$
       - id: eslint
         name: eslint
         language: system
@@ -134,3 +131,121 @@ repos:
         entry: node_modules/stylelint/bin/stylelint.js --config=.github/linters/.stylintrc --syntax less **/*.less
         args: [--fix]
         files: \.(css|scss|sass|less)$
+      - id: checkov
+        name: Checkov
+        description: Runs checkov on Terraform templates.
+        entry: pre_commit_hooks/terraform/checkov.sh
+        language: python
+        pass_filenames: false
+        always_run: false
+        files: \.tf$
+        require_serial: true
+        exclude: >
+          (?x)^(
+            .+\.vendor\/.*$|
+            .+\.terraform\/.*$|
+          )$
+
+      # Terraform specific hooks
+
+      - id: terraform_fmt
+        name: Terraform fmt
+        description: Rewrites all Terraform configuration files to a canonical format.
+        entry: pre_commit_hooks/terraform/terraform_fmt.sh
+        language: script
+        files: (\.tf|\.tfvars)$
+        exclude: >
+          (?x)^(
+            .+\.vendor\/.*$|
+            .+\.terraform\/.*$|
+          )$
+
+      - id: terraform_docs
+        name: Terraform docs
+        description: Inserts input and output documentation into README.md (using terraform-docs).
+        require_serial: true
+        entry: pre_commit_hooks/terraform/terraform_docs.sh
+        language: script
+        files: (\.tf)$
+        exclude: >
+          (?x)^(
+            .+\.vendor\/.*$|
+            .+\.terraform\/.*$|
+          )$
+
+      - id: terraform_docs_without_aggregate_type_defaults
+        name: Terraform docs (without aggregate type defaults)
+        description: Inserts input and output documentation into README.md (using terraform-docs). Identical to terraform_docs.
+        require_serial: true
+        entry: pre_commit_hooks/terraform/terraform_docs.sh
+        language: script
+        files: (\.tf)$
+        exclude: >
+          (?x)^(
+            .+\.vendor\/.*$|
+            .+\.terraform\/.*$|
+          )$
+
+      - id: terraform_docs_replace
+        name: Terraform docs (overwrite README.md)
+        description: Overwrite content of README.md with terraform-docs.
+        require_serial: true
+        entry: pre_commit_hooks/terraform/terraform_docs_replace
+        language: python
+        files: (\.tf)$
+        exclude: >
+          (?x)^(
+            .+\.vendor\/.*$|
+            .+\.terraform\/.*$|
+          )$
+
+      - id: terraform_validate
+        name: Terraform validate
+        description: Validates all Terraform configuration files.
+        require_serial: true
+        entry: pre_commit_hooks/terraform/terraform_validate.sh
+        language: script
+        files: (\.tf|\.tfvars)$
+        exclude: >
+          (?x)^(
+            .+\.vendor\/.*$|
+            .+\.terraform\/.*$|
+          )$
+
+      - id: terraform_tflint
+        name: Terraform validate with tflint
+        description: Validates all Terraform configuration files with TFLint.
+        entry: pre_commit_hooks/terraform/terraform_tflint.sh
+        language: script
+        files: (\.tf|\.tfvars)$
+        args:
+          - '--args=--config=__GIT_WORKING_DIR__/.github/linters/.tflint.hcl'
+        exclude: >
+          (?x)^(
+            .+\.vendor\/.*$|
+            .+\.terraform\/.*$|
+          )$
+
+      - id: terraform_tfsec
+        name: Terraform validate with tfsec
+        description: Static analysis of Terraform templates to spot potential security issues.
+        entry: pre_commit_hooks/terraform/terraform_tfsec.sh
+        language: script
+
+      # Terragrunt specific hooks
+
+      - id: terragrunt_fmt
+        name: Terragrunt fmt
+        description: Rewrites all Terragrunt configuration files to a canonical format.
+        entry: pre_commit_hooks/terragrunt/terragrunt_fmt.sh
+        language: script
+        files: (\.hcl)$
+        exclude: \.terraform\/.*$
+
+      - id: terragrunt_validate
+        name: Terragrunt validate
+        description: Validates all Terragrunt configuration files.
+        entry: pre_commit_hooks/terragrunt/terragrunt_validate.sh
+        language: script
+        files: (\.hcl)$
+        exclude: \.terraform\/.*$
