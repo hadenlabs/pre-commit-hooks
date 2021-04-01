@@ -21,6 +21,7 @@ This repository is a collection of Git hooks to be used with the [pre-commit](ht
 ## Features
 
 - [Terraform](https://github.com/terraform-linters/tflint)
+- [TodoCheck](https://github.com/preslavmihaylov/todocheck)
 - [Go](https://golang.org)
 - [Markdown](https://github.com/tcort/markdown-link-check)
 - [Shellcheck](https://github.com/koalaman/shellcheck)
@@ -151,11 +152,21 @@ repos:
       - id: go-mod-vendor
 ```
 
+### check:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.0.0
+    hooks:
+      - id: todocheck
+```
+
 ## Help
 
 **Got a question?**
 
-File a GitHub [issue](https://github.com/hadenlabs/pre-commit-hooks/issues), send us an [email](email) or join our [Slack Community](slack).
+File a GitHub [issue](https://github.com/hadenlabs/pre-commit-hooks/issues).
 
 ## Contributing
 
