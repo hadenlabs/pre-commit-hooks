@@ -115,7 +115,7 @@ For additional context, refer to some of these links.
 
 **Got a question?**
 
-File a GitHub [issue]({{ printf "https://github.com/%s/issues" (ds "config").github_repo}}), send us an [email](email) or join our [Slack Community](slack).
+File a GitHub [issue]({{ printf "https://github.com/%s/issues" (ds "config").github_repo}}).
 
 ## Contributing
 
@@ -191,4 +191,3 @@ The code and styles are licensed under the {{(ds "config").license }} license [S
 ## Don't forget to 🌟 Star 🌟 the repo if you like {{(ds "config").name}}
 
 [Your feedback is appreciated]({{ printf "https://github.com/%s/issues" (ds "config").github_repo}})
-
