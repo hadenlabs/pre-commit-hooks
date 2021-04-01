@@ -41,6 +41,7 @@ description: |-
 
 features:
   - '[Terraform](https://github.com/terraform-linters/tflint)'
+  - '[Go](https://golang.org)'
   - '[Markdown](https://github.com/tcort/markdown-link-check)'
   - '[Shellcheck](https://github.com/koalaman/shellcheck)'
 
@@ -52,8 +53,6 @@ installation:
 todo:
   - name: 'chore: implement hook gnu make'
     url: 'https://github.com/hadenlabs/pre-commit-hooks/issues/2'
-  - name: 'chore: implement hook Go'
-    url: 'https://github.com/hadenlabs/pre-commit-hooks/issues/3'
 
 # How to use this project
 usage: |-
@@ -64,13 +63,14 @@ usage: |-
 
   ```yaml
     repos:
-      - repo: https://github.com/mineiros-io/pre-commit-hooks
-        rev: <VERSION> # Check for the latest version: https://github.com/mineiros-io/pre-commit-hooks/releases
+      - repo: https://github.com/hadenlabs/pre-commit-hooks
+        rev: 0.0.0
         hooks:
           - id: terraform-fmt
           - id: terraform-validate
-          - id: tflint
           - id: markdown-link-check
+          - id: go-fmt
+
   ```
 
   Once you created the configuration file inside your repository, you must run `pre-commit install` to activate the hooks.
