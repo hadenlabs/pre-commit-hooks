@@ -21,14 +21,13 @@ This repository is a collection of Git hooks to be used with the [pre-commit](ht
 ## Features
 
 - [Terraform](https://github.com/terraform-linters/tflint)
+- [Go](https://golang.org)
 - [Markdown](https://github.com/tcort/markdown-link-check)
 - [Shellcheck](https://github.com/koalaman/shellcheck)
 
 ## To-do
 
 - [chore: implement hook gnu make](https://github.com/hadenlabs/pre-commit-hooks/issues/2)
-
-- [chore: implement hook Go](https://github.com/hadenlabs/pre-commit-hooks/issues/3)
 
 ## Installation
 
@@ -57,13 +56,13 @@ Create a `.pre-commit-config.yaml` inside your repositories and add the desired 
 
 ```yaml
 repos:
-  - repo: https://github.com/mineiros-io/pre-commit-hooks
-    rev: <VERSION> # Check for the latest version: https://github.com/mineiros-io/pre-commit-hooks/releases
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.0.0
     hooks:
       - id: terraform-fmt
       - id: terraform-validate
-      - id: tflint
       - id: markdown-link-check
+      - id: go-fmt
 ```
 
 Once you created the configuration file inside your repository, you must run `pre-commit install` to activate the hooks. That's it, pre-commit will now listen for changes in your files and run the checks accordingly.
@@ -80,6 +79,76 @@ pre-commit run --all-files
 
 ```shell script
 pre-commit run terraform-validate --all-files
+```
+
+### terraform:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.0.0
+    hooks:
+      - id: terraform-fmt
+      - id: terraform-validate
+      - id: terraform-docs
+      - id: terraform-docs-replace
+      - id: terraform-tflint
+      - id: terraform-tfsec
+      - id: checkov
+```
+
+### terragrunt:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.0.0
+    hooks:
+      - id: terragrunt-fmt
+      - id: terraform-validate
+```
+
+### markdown:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.0.0
+    hooks:
+      - id: markdown-link-check
+```
+
+### shell:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.0.0
+    hooks:
+      - id: shellcheck
+```
+
+### Go:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.0.0
+    hooks:
+      - id: go-fmt
+      - id: go-imports
+      - id: go-vet
+      - id: go-lint
+      - id: go-cyclo
+      - id: validate-toml
+      - id: no-go-testing
+      - id: golangci-lint
+      - id: go-critic
+      - id: go-unit-tests
+      - id: go-build
+      - id: go-mod-tidy
+      - id: go-mod-vendor
+      - id: go-mod-vendor
 ```
 
 ## Help
