@@ -144,3 +144,13 @@
   files: (\.hcl)$
   exclude: \.terraform\/.*$
   minimum_pre_commit_version: 0.15.0
+
+# bash
+
+- id: shellcheck
+  name: shellcheck
+  description: Test shell scripts with shellcheck
+  entry: pre_commit_hooks/shell/shellcheck.sh
+  language: script
+  types: [shell]
+  require_serial: true # shellcheck can detect sourcing this way

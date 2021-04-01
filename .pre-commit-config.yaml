@@ -84,13 +84,6 @@ repos:
       - id: validate-toml
       - id: no-go-testing
       - id: golangci-lint
-  - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.7.1.1
-    hooks:
-      - id: shellcheck
-        exclude: (^provision/script/wait-for-it.sh$|^provision/git/hooks/prepare-commit-msg$)
-        args:
-          - --exclude=SC1072,SC1073,SC2068
   - repo: local
     hooks:
       - id: prettier
@@ -249,3 +242,14 @@ repos:
         language: script
         files: (\.hcl)$
         exclude: \.terraform\/.*$
+
+      - id: shellcheck
+        name: shellcheck
+        description: Test shell scripts with shellcheck
+        entry: pre_commit_hooks/shell/shellcheck.sh
+        language: script
+        types: [shell]
+        require_serial: true # shellcheck can detect sourcing this way
+        exclude: (^provision/script/wait-for-it.sh$|^provision/git/hooks/prepare-commit-msg$)
+        args:
+          - --exclude=SC1072,SC1073,SC2068
