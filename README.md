@@ -64,10 +64,7 @@ repos:
       - id: terraform-fmt
       - id: terraform-validate
       - id: tflint
-      - id: golangci-lint
-      - id: phony-targets
       - id: markdown-link-check
-      - id: shellcheck
 ```
 
 Once you created the configuration file inside your repository, you must run `pre-commit install` to activate the hooks. That's it, pre-commit will now listen for changes in your files and run the checks accordingly.
@@ -124,7 +121,7 @@ All other trademarks referenced herein are the property of their respective owne
 
 ## License
 
-The code and styles are licensed under the LGPL-3.0 license [See project license.](LICENSE).
+The code and styles are licensed under the LGPLv3 license [See project license.](LICENSE).
 
 ## Don't forget to 🌟 Star 🌟 the repo if you like pre-commit-hooks
 
