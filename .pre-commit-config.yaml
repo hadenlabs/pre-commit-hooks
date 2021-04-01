@@ -135,7 +135,7 @@ repos:
 
       # Terraform specific hooks
 
-      - id: terraform_fmt
+      - id: terraform-fmt
         name: Terraform fmt
         description: Rewrites all Terraform configuration files to a canonical format.
         entry: pre_commit_hooks/terraform/terraform_fmt.sh
@@ -147,7 +147,7 @@ repos:
             .+\.terraform\/.*$|
           )$
 
-      - id: terraform_docs
+      - id: terraform-docs
         name: Terraform docs
         description: Inserts input and output documentation into README.md (using terraform-docs).
         require_serial: true
@@ -160,7 +160,7 @@ repos:
             .+\.terraform\/.*$|
           )$
 
-      - id: terraform_docs_without_aggregate_type_defaults
+      - id: terraform-docs-without-aggregate-type-defaults
         name: Terraform docs (without aggregate type defaults)
         description: Inserts input and output documentation into README.md (using terraform-docs). Identical to terraform_docs.
         require_serial: true
@@ -173,7 +173,7 @@ repos:
             .+\.terraform\/.*$|
           )$
 
-      - id: terraform_docs_replace
+      - id: terraform-docs-replace
         name: Terraform docs (overwrite README.md)
         description: Overwrite content of README.md with terraform-docs.
         require_serial: true
@@ -186,7 +186,7 @@ repos:
             .+\.terraform\/.*$|
           )$
 
-      - id: terraform_validate
+      - id: terraform-validate
         name: Terraform validate
         description: Validates all Terraform configuration files.
         require_serial: true
@@ -199,7 +199,7 @@ repos:
             .+\.terraform\/.*$|
           )$
 
-      - id: terraform_tflint
+      - id: terraform-tflint
         name: Terraform validate with tflint
         description: Validates all Terraform configuration files with TFLint.
         entry: pre_commit_hooks/terraform/terraform_tflint.sh
@@ -213,7 +213,7 @@ repos:
             .+\.terraform\/.*$|
           )$
 
-      - id: terraform_tfsec
+      - id: terraform-tfsec
         name: Terraform validate with tfsec
         description: Static analysis of Terraform templates to spot potential security issues.
         entry: pre_commit_hooks/terraform/terraform_tfsec.sh
@@ -221,7 +221,7 @@ repos:
 
       # Terragrunt specific hooks
 
-      - id: terragrunt_fmt
+      - id: terragrunt-fmt
         name: Terragrunt fmt
         description: Rewrites all Terragrunt configuration files to a canonical format.
         entry: pre_commit_hooks/terragrunt/terragrunt_fmt.sh
@@ -229,7 +229,7 @@ repos:
         files: (\.hcl)$
         exclude: \.terraform\/.*$
 
-      - id: terragrunt_validate
+      - id: terragrunt-validate
         name: Terragrunt validate
         description: Validates all Terragrunt configuration files.
         entry: pre_commit_hooks/terragrunt/terragrunt_validate.sh
