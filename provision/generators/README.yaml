@@ -42,6 +42,7 @@ description: |-
 features:
   - '[Terraform](https://github.com/terraform-linters/tflint)'
   - '[Markdown](https://github.com/tcort/markdown-link-check)'
+  - '[Shellcheck](https://github.com/koalaman/shellcheck)'
 
 installation:
   - docs/installation/base.md
@@ -53,8 +54,6 @@ todo:
     url: 'https://github.com/hadenlabs/pre-commit-hooks/issues/2'
   - name: 'chore: implement hook Go'
     url: 'https://github.com/hadenlabs/pre-commit-hooks/issues/3'
-  - name: 'chore: implement hook Bash'
-    url: 'https://github.com/hadenlabs/pre-commit-hooks/issues/4'
 
 # How to use this project
 usage: |-
