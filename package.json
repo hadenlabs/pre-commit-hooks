@@ -1,10 +1,10 @@
 {
-  "name": "pre-commit-hooks",
-  "version": "0.1.0",
-  "description": "secrets terraform",
+  "name": "@hadenlabs/pre-commit-hooks",
+  "version": "0.0.0",
+  "description": "pre-commit-hooks for git",
   "repository": "ssh://git@github.com/hadenlabs/pre-commit-hooks.git",
   "author": "Luis Mayta <slovacus@gmail.com>",
-  "license": "MIT",
+  "license": "LGPLv3",
   "engines": {
     "node": ">=14"
   },
