@@ -330,3 +330,13 @@ repos:
         files: '\.go$'
         language: 'script'
         description: 'Runs `go mod vendor`, requires golang'
+
+        # check
+      - id: todocheck
+        name: todo check
+        description: Tests files with todocheck.
+        entry: pre_commit_hooks/check/todocheck.sh
+        language: 'script'
+        always_run: true
+        pass_filenames: false
+        minimum_pre_commit_version: 0.15.0
