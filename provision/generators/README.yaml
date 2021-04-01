@@ -41,6 +41,7 @@ description: |-
 
 features:
   - '[Terraform](https://github.com/terraform-linters/tflint)'
+  - '[TodoCheck](https://github.com/preslavmihaylov/todocheck)'
   - '[Go](https://golang.org)'
   - '[Markdown](https://github.com/tcort/markdown-link-check)'
   - '[Shellcheck](https://github.com/koalaman/shellcheck)'

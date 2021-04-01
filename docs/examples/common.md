@@ -79,3 +79,13 @@ repos:
       - id: go-mod-vendor
       - id: go-mod-vendor
 ```
+
+### check:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.0.0
+    hooks:
+      - id: todocheck
+```
