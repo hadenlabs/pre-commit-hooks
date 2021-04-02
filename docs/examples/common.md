@@ -99,3 +99,13 @@ repos:
     hooks:
       - id: do-not-commit
 ```
+
+### docker:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.1.0
+    hooks:
+      - id: hadolint
+```
