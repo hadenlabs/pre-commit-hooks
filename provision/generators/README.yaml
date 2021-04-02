@@ -45,6 +45,7 @@ features:
   - '[Go](https://golang.org)'
   - '[Markdown](https://github.com/tcort/markdown-link-check)'
   - '[Shellcheck](https://github.com/koalaman/shellcheck)'
+  - '[Hadolint](https://github.com/hadolint/hadolint)'
 
 installation:
   - docs/installation/base.md
