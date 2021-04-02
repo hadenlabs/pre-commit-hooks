@@ -89,3 +89,13 @@ repos:
     hooks:
       - id: todocheck
 ```
+
+### grep:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.1.0
+    hooks:
+      - id: do-not-commit
+```
