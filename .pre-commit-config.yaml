@@ -327,6 +327,7 @@ repos:
         files: '\.go$'
         language: 'script'
         description: 'Runs `go mod vendor`, requires golang'
+        minimum_pre_commit_version: 0.15.0
 
         # check
       - id: todocheck
@@ -336,4 +337,14 @@ repos:
         language: 'script'
         always_run: true
         pass_filenames: false
+        minimum_pre_commit_version: 0.15.0
+
+      # docker
+      - id: hadolint
+        name: hadolint
+        description: Tests files Dockerfiles with hadolint
+        entry: pre_commit_hooks/docker/hadolint.sh
+        language: 'script'
+        types: [file]
+        files: Dockerfile(.*)
         minimum_pre_commit_version: 0.15.0
