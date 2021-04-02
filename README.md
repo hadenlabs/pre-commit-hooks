@@ -25,6 +25,7 @@ This repository is a collection of Git hooks to be used with the [pre-commit](ht
 - [Go](https://golang.org)
 - [Markdown](https://github.com/tcort/markdown-link-check)
 - [Shellcheck](https://github.com/koalaman/shellcheck)
+- [Hadolint](https://github.com/hadolint/hadolint)
 
 ## To-do
 
@@ -170,6 +171,16 @@ repos:
     rev: 0.1.0
     hooks:
       - id: do-not-commit
+```
+
+### docker:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.1.0
+    hooks:
+      - id: hadolint
 ```
 
 ## Help
