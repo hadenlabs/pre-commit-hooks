@@ -257,3 +257,12 @@
   name: Block if "DO NOT COMMIT" is found
   entry: DO NOT COMMIT
   language: pygrep
+
+# docker
+- id: hadolint
+  name: hadolint
+  description: Tests files Dockerfiles with hadolint
+  entry: pre_commit_hooks/docker/hadolint.sh
+  language: 'script'
+  types: [file]
+  files: Dockerfile(.*)
