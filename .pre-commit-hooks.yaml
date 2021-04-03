@@ -24,11 +24,13 @@
   description: Runs checkov on Terraform templates.
   entry: pre_commit_hooks/terraform/checkov.sh
   language: script
-  pass_filenames: false
+  pass_filenames: true
+  require_serial: true
   always_run: false
   files: \.tf$
   exclude: >
     (?x)^(
+      .+\.node_modules\/.*$|
       .+\.vendor\/.*$|
       .+\.terraform\/.*$|
     )$
@@ -122,9 +124,13 @@
   name: Terraform validate with tfsec
   description: Static analysis of Terraform templates to spot potential security issues.
   entry: pre_commit_hooks/terraform/terraform_tfsec.sh
+  require_serial: true
   language: script
+  pass_filenames: true
+  files: \.tf$
   exclude: >
     (?x)^(
+      .+\.node_modules\/.*$|
       .+\.vendor\/.*$|
       .+\.terraform\/.*$|
     )$
@@ -168,24 +174,28 @@
   entry: pre_commit_hooks/go/go-fmt.sh
   files: '\.go$'
   language: 'script'
+
 - id: go-imports
   name: 'go imports'
   description: Tests go files with `goimports`
   entry: pre_commit_hooks/go/go-imports.sh
   files: '\.go$'
   language: 'script'
+
 - id: go-vet
   name: 'go vet'
   description: Tests go files with `go vet`
   entry: pre_commit_hooks/go/go-vet.sh
   files: '\.go$'
   language: 'script'
+
 - id: go-lint
   name: 'go lint'
   description: Tests go files with `golint`
   entry: pre_commit_hooks/go/go-lint.sh
   files: '\.go$'
   language: 'script'
+
 - id: go-cyclo
   name: 'go-cyclo'
   description: Tests go files with `gocyclo`
@@ -193,6 +203,7 @@
   files: '\.go$'
   language: 'script'
   args: [-over=15]
+
 - id: validate-toml
   name: 'validate toml'
   description: >
@@ -200,14 +211,16 @@
   entry: 'tomlv'
   files: '\.toml$'
   language: 'system'
-- id: 'no-go-testing'
+
+- id: no-go-testing
   name: "Check files aren't using go's testing package"
   description: >
     Checks that no files are using `testing.T`, if you want developers to use
     a different testing framework
   entry: 'testing\.T'
   files: 'test_.*\.go$'
-  language: 'pygrep'
+  language: pygrep
+
 - id: golangci-lint
   name: 'golangci-lint'
   description: Tests go files with `golangci-lint`
@@ -215,30 +228,35 @@
   types: [go]
   language: 'script'
   pass_filenames: false
+
 - id: go-critic
   name: 'go-critic'
   description: Tests go files with `go-critic`
   entry: pre_commit_hooks/go/go-critic.sh
   files: '\.go$'
   language: 'script'
+
 - id: go-unit-tests
   name: 'go-unit-tests'
   entry: pre_commit_hooks/go/go-unit-tests.sh
   files: '\.go$'
   language: 'script'
   description: 'Runs `go test`'
+
 - id: go-build
   name: 'go-build'
   entry: pre_commit_hooks/go/go-build.sh
   files: '\.go$'
   language: 'script'
   description: 'Runs `go build`, requires golang'
+
 - id: go-mod-tidy
   name: 'go-mod-tidy'
   entry: pre_commit_hooks/go/go-mod-tidy.sh
   files: '\.go$'
   language: 'script'
   description: 'Runs `go mod tidy -v`, requires golang'
+
 - id: go-mod-vendor
   name: 'go-mod-vendor'
   entry: pre_commit_hooks/go/go-mod-vendor.sh

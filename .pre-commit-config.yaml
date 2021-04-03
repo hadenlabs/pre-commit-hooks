@@ -115,6 +115,7 @@ repos:
         entry: node_modules/stylelint/bin/stylelint.js --config=.github/linters/.stylintrc --syntax less **/*.less
         args: [--fix]
         files: \.(css|scss|sass|less)$
+
       - id: checkov
         name: Checkov
         description: Runs checkov on Terraform templates.
@@ -125,6 +126,39 @@ repos:
         files: \.tf$
         exclude: >
           (?x)^(
+            .+\.vendor\/.*$|
+            .+\.terraform\/.*$|
+          )$
+        minimum_pre_commit_version: 0.15.0
+
+      - id: markdown-link-check
+        name: markdown-link-check
+        description: Markdown-link-check checks all of the hyperlinks in a markdown text to determine if they are alive or dead.
+        entry: pre_commit_hooks/markdown/markdown-link-check.sh
+        language: script
+        files: \.md$
+        args: []
+        exclude: >
+          (?x)^(
+            .+\.vendor\/.*$|
+            .+\.terraform\/.*$|
+          )$
+        minimum_pre_commit_version: 0.15.0
+
+      # Checkov specific hooks
+
+      - id: checkov
+        name: Checkov
+        description: Runs checkov on Terraform templates.
+        entry: pre_commit_hooks/terraform/checkov.sh
+        language: script
+        pass_filenames: true
+        require_serial: true
+        always_run: false
+        files: \.tf$
+        exclude: >
+          (?x)^(
+            .+\.node_modules\/.*$|
             .+\.vendor\/.*$|
             .+\.terraform\/.*$|
           )$
@@ -143,6 +177,7 @@ repos:
             .+\.vendor\/.*$|
             .+\.terraform\/.*$|
           )$
+        minimum_pre_commit_version: 0.15.0
 
       - id: terraform-docs
         name: Terraform docs
@@ -156,6 +191,7 @@ repos:
             .+\.vendor\/.*$|
             .+\.terraform\/.*$|
           )$
+        minimum_pre_commit_version: 0.15.0
 
       - id: terraform-docs-without-aggregate-type-defaults
         name: Terraform docs (without aggregate type defaults)
@@ -169,6 +205,7 @@ repos:
             .+\.vendor\/.*$|
             .+\.terraform\/.*$|
           )$
+        minimum_pre_commit_version: 0.15.0
 
       - id: terraform-docs-replace
         name: Terraform docs (overwrite README.md)
@@ -182,6 +219,7 @@ repos:
             .+\.vendor\/.*$|
             .+\.terraform\/.*$|
           )$
+        minimum_pre_commit_version: 0.15.0
 
       - id: terraform-validate
         name: Terraform validate
@@ -195,6 +233,7 @@ repos:
             .+\.vendor\/.*$|
             .+\.terraform\/.*$|
           )$
+        minimum_pre_commit_version: 0.15.0
 
       - id: terraform-tflint
         name: Terraform validate with tflint
@@ -202,19 +241,28 @@ repos:
         entry: pre_commit_hooks/terraform/terraform_tflint.sh
         language: script
         files: (\.tf|\.tfvars)$
-        args:
-          - '--args=--config=__GIT_WORKING_DIR__/.github/linters/.tflint.hcl'
         exclude: >
           (?x)^(
             .+\.vendor\/.*$|
             .+\.terraform\/.*$|
           )$
+        minimum_pre_commit_version: 0.15.0
 
       - id: terraform-tfsec
         name: Terraform validate with tfsec
         description: Static analysis of Terraform templates to spot potential security issues.
         entry: pre_commit_hooks/terraform/terraform_tfsec.sh
+        require_serial: true
         language: script
+        pass_filenames: true
+        files: \.tf$
+        exclude: >
+          (?x)^(
+            .+\.node_modules\/.*$|
+            .+\.vendor\/.*$|
+            .+\.terraform\/.*$|
+          )$
+        minimum_pre_commit_version: 0.15.0
 
       # Terragrunt specific hooks
 
@@ -225,6 +273,7 @@ repos:
         language: script
         files: (\.hcl)$
         exclude: \.terraform\/.*$
+        minimum_pre_commit_version: 0.15.0
 
       - id: terragrunt-validate
         name: Terragrunt validate
@@ -233,6 +282,9 @@ repos:
         language: script
         files: (\.hcl)$
         exclude: \.terraform\/.*$
+        minimum_pre_commit_version: 0.15.0
+
+      # bash
 
       - id: shellcheck
         name: shellcheck
@@ -241,33 +293,37 @@ repos:
         language: script
         types: [shell]
         require_serial: true # shellcheck can detect sourcing this way
-        exclude: (^provision/script/wait-for-it.sh$|^provision/git/hooks/prepare-commit-msg$)
-        args:
-          - --exclude=SC1072,SC1073,SC2068
+
+      # go
+
       - id: go-fmt
         name: 'go fmt'
         description: Test go files with `gofmt`
         entry: pre_commit_hooks/go/go-fmt.sh
         files: '\.go$'
         language: 'script'
+
       - id: go-imports
         name: 'go imports'
         description: Tests go files with `goimports`
         entry: pre_commit_hooks/go/go-imports.sh
         files: '\.go$'
         language: 'script'
+
       - id: go-vet
         name: 'go vet'
         description: Tests go files with `go vet`
         entry: pre_commit_hooks/go/go-vet.sh
         files: '\.go$'
         language: 'script'
+
       - id: go-lint
         name: 'go lint'
         description: Tests go files with `golint`
         entry: pre_commit_hooks/go/go-lint.sh
         files: '\.go$'
         language: 'script'
+
       - id: go-cyclo
         name: 'go-cyclo'
         description: Tests go files with `gocyclo`
@@ -275,6 +331,7 @@ repos:
         files: '\.go$'
         language: 'script'
         args: [-over=15]
+
       - id: validate-toml
         name: 'validate toml'
         description: >
@@ -282,14 +339,16 @@ repos:
         entry: 'tomlv'
         files: '\.toml$'
         language: 'system'
-      - id: 'no-go-testing'
+
+      - id: no-go-testing
         name: "Check files aren't using go's testing package"
         description: >
           Checks that no files are using `testing.T`, if you want developers to use
           a different testing framework
         entry: 'testing\.T'
         files: 'test_.*\.go$'
-        language: 'pygrep'
+        language: pygrep
+
       - id: golangci-lint
         name: 'golangci-lint'
         description: Tests go files with `golangci-lint`
@@ -297,39 +356,44 @@ repos:
         types: [go]
         language: 'script'
         pass_filenames: false
+
       - id: go-critic
         name: 'go-critic'
         description: Tests go files with `go-critic`
         entry: pre_commit_hooks/go/go-critic.sh
         files: '\.go$'
         language: 'script'
+
       - id: go-unit-tests
         name: 'go-unit-tests'
         entry: pre_commit_hooks/go/go-unit-tests.sh
         files: '\.go$'
         language: 'script'
         description: 'Runs `go test`'
+
       - id: go-build
         name: 'go-build'
         entry: pre_commit_hooks/go/go-build.sh
         files: '\.go$'
         language: 'script'
         description: 'Runs `go build`, requires golang'
+
       - id: go-mod-tidy
         name: 'go-mod-tidy'
         entry: pre_commit_hooks/go/go-mod-tidy.sh
         files: '\.go$'
         language: 'script'
         description: 'Runs `go mod tidy -v`, requires golang'
+
       - id: go-mod-vendor
         name: 'go-mod-vendor'
         entry: pre_commit_hooks/go/go-mod-vendor.sh
         files: '\.go$'
         language: 'script'
         description: 'Runs `go mod vendor`, requires golang'
-        minimum_pre_commit_version: 0.15.0
 
-        # check
+      # todocheck specific hooks
+
       - id: todocheck
         name: todo check
         description: Tests files with todocheck.
@@ -347,4 +411,3 @@ repos:
         language: 'script'
         types: [file]
         files: Dockerfile(.*)
-        minimum_pre_commit_version: 0.15.0
