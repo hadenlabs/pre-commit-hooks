@@ -23,11 +23,10 @@
   name: Checkov
   description: Runs checkov on Terraform templates.
   entry: pre_commit_hooks/terraform/checkov.sh
-  language: python
+  language: script
   pass_filenames: false
   always_run: false
   files: \.tf$
-  require_serial: true
   exclude: >
     (?x)^(
       .+\.vendor\/.*$|
@@ -124,6 +123,12 @@
   description: Static analysis of Terraform templates to spot potential security issues.
   entry: pre_commit_hooks/terraform/terraform_tfsec.sh
   language: script
+  exclude: >
+    (?x)^(
+      .+\.vendor\/.*$|
+      .+\.terraform\/.*$|
+    )$
+  minimum_pre_commit_version: 0.15.0
 
 # Terragrunt specific hooks
 
