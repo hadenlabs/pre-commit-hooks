@@ -239,6 +239,7 @@ repos:
         name: Terraform validate with tflint
         description: Validates all Terraform configuration files with TFLint.
         entry: pre_commit_hooks/terraform/terraform_tflint.sh
+        require_serial: true
         language: script
         files: (\.tf|\.tfvars)$
         exclude: >
