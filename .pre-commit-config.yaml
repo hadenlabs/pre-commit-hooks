@@ -412,3 +412,17 @@ repos:
         language: 'script'
         types: [file]
         files: Dockerfile(.*)
+
+      # git
+      - id: gitleaks
+        name: gitleaks validate commits
+        description: Validates all commits with gitleaks.
+        entry: pre_commit_hooks/git/gitleaks.sh
+        pass_filenames: false
+        require_serial: true
+        args:
+          - --path=.
+          - --repo-config-path=.github/linters/.gitleaks.toml
+          - --verbose
+        language: script
+        minimum_pre_commit_version: 0.15.0
