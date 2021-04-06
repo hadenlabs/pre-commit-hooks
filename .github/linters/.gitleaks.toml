@@ -168,8 +168,8 @@ title = "gitleaks config"
     files = [
       '''(.*?)(jpg|gif|doc|pdf|bin)$''',
       '''^\.gitignore$''',
+      '''^\.gitleaks.toml$''',
       '''^yarn.lock$''',
-
     ]
 
 [whitelist]
