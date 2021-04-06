@@ -54,10 +54,10 @@
 - id: terraform-docs
   name: Terraform docs
   description: Inserts input and output documentation into README.md (using terraform-docs).
-  require_serial: true
   entry: pre_commit_hooks/terraform/terraform_docs.sh
+  require_serial: true
   language: script
-  files: (\.tf)$
+  files: (\.tf|\.tfvars)$
   exclude: >
     (?x)^(
       .+\.vendor\/.*$|
