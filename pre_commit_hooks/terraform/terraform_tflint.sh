@@ -28,7 +28,7 @@ initialize_() {
   _SCRIPT_DIR="$(dirname "$source")"
 
   # shellcheck source=/dev/null
-  source "$_SCRIPT_DIR/../libs/lib_getopt"
+  source "$_SCRIPT_DIR/../../libs/github.com/agriffis/pure-getopt/getopt.bash"
 
 }
 
