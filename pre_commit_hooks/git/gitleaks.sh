@@ -32,9 +32,7 @@ initialize_() {
 }
 
 gitleaks_() {
-  echo "$@"
   gitleaks "$@"
-  exit 1
 }
 
 [[ ${BASH_SOURCE[0]} != "$0" ]] || main "$@"
