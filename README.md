@@ -183,6 +183,20 @@ repos:
       - id: hadolint
 ```
 
+### gitleaks:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.1.0
+    hooks:
+      - id: gitleaks
+        args:
+          - --path=.
+          - --repo-config-path=.github/linters/.gitleaks.toml
+          - --verbose
+```
+
 ## Help
 
 **Got a question?**
