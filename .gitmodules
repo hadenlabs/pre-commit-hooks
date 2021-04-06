@@ -1,0 +1,3 @@
+[submodule "libs/github.com/agriffis/pure-getopt"]
+	path = libs/github.com/agriffis/pure-getopt
+	url = https://github.com/agriffis/pure-getopt
