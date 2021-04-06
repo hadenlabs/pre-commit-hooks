@@ -20,6 +20,10 @@ repos:
       - id: terraform-fmt
       - id: terraform-validate
       - id: terraform-docs
+        args:
+          - '--output-file=docs/include/terraform.md'
+          - '--output-mode=replace'
+          - '--sort-by-type'
       - id: terraform-docs-replace
       - id: terraform-tflint
       - id: terraform-tfsec
