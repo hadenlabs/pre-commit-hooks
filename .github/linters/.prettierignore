@@ -8,6 +8,7 @@ package-lock.json
 coverage
 .mypy_cache/
 .build
+libs/github.com/
 .terraform
 *.tpl.md
 *.enc.yaml
