@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. This file uses change log convention from [keep a CHANGELOG](http://keepachangelog.com/en/0.3.0/).
 
+<a name="0.2.0"></a>
+
+## [0.2.0](https://github.com/hadenlabs/pre-commit-hooks/compare/0.1.0...0.2.0)
+
+> 2021-04-05
+
+### Bug Fixes
+
+- validation ignore file tflint hcl ([#21](https://github.com/hadenlabs/pre-commit-hooks/issues/21))
+- allowlist gitleaks toml ([#21](https://github.com/hadenlabs/pre-commit-hooks/issues/21))
+- validation gitleaks ([#21](https://github.com/hadenlabs/pre-commit-hooks/issues/21))
+- get options for validation tflint and tfsec ([#22](https://github.com/hadenlabs/pre-commit-hooks/issues/22))
+- validation checkov and terraform tfsec ([#19](https://github.com/hadenlabs/pre-commit-hooks/issues/19))
+- settings checkov validation ([#19](https://github.com/hadenlabs/pre-commit-hooks/issues/19))
+
+### Code Refactoring
+
+- library pure-getopt ([#21](https://github.com/hadenlabs/pre-commit-hooks/issues/21))
+
+### Features
+
+- implement configuration gitleaks ([#21](https://github.com/hadenlabs/pre-commit-hooks/issues/21))
+- add configuration require serial pre-commit-hooks ([#22](https://github.com/hadenlabs/pre-commit-hooks/issues/22))
+- implement lib getopt bash pure ([#22](https://github.com/hadenlabs/pre-commit-hooks/issues/22))
+- sync configuration pre-commit checkov ([#19](https://github.com/hadenlabs/pre-commit-hooks/issues/19))
+- implement hook hadolint ([#17](https://github.com/hadenlabs/pre-commit-hooks/issues/17))
+- implement hooks do-not-commit ([#15](https://github.com/hadenlabs/pre-commit-hooks/issues/15))
+
+### Features
+
+- change publish config in package json ([#15](https://github.com/hadenlabs/pre-commit-hooks/issues/15))
+- upgrade template readme and changelog ([#15](https://github.com/hadenlabs/pre-commit-hooks/issues/15))
+
 <a name="0.1.0"></a>
 
 ## 0.1.0
