@@ -14,7 +14,7 @@
 
 # pre-commit-hooks
 
-[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/hadenlabs/pre-commit-hooks.svg?label=latest&sort=semver)](https://github.com/hadenlabs/pre-commit-hooks/releases) [![Lint](https://github.com/hadenlabs/pre-commit-hooks/actions/workflows/lint.yml/badge.svg?branch=develop)](https://github.com/hadenlabs/pre-commit-hooks/actions) [![Issues](https://img.shields.io/github/issues/hadenlabs/pre-commit-hooks.svg)](https://github.com/hadenlabs/pre-commit-hooks/issues) [![Latest Release](https://img.shields.io/github/release/hadenlabs/pre-commit-hooks.svg)](https://github.com/hadenlabs/pre-commit-hooks/releases)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/hadenlabs/pre-commit-hooks.svg?label=latest&sort=semver)](https://github.com/hadenlabs/pre-commit-hooks/releases) [![Lint](https://github.com/hadenlabs/pre-commit-hooks/actions/workflows/lint.yml/badge.svg?branch=develop)](https://github.com/hadenlabs/pre-commit-hooks/actions) [![Issues](https://img.shields.io/github/issues/hadenlabs/pre-commit-hooks.svg)](https://github.com/hadenlabs/pre-commit-hooks/issues) [![Latest Release](https://img.shields.io/github/release/hadenlabs/pre-commit-hooks.svg)](https://github.com/hadenlabs/pre-commit-hooks/releases) [![Beacon](https://ga-beacon.appspot.com/G-MZEK48EGE8/pre-commit-hooks/readme)](https://github.com/hadenlabs/pre-commit-hooks)
 
 This repository is a collection of Git hooks to be used with the [pre-commit](https://pre-commit.com/) framework.
 
@@ -250,7 +250,7 @@ All other trademarks referenced herein are the property of their respective owne
 
 ## License
 
-The code and styles are licensed under the LGPLv3 license [See project license.](LICENSE).
+The code and styles are licensed under the LGPLV3 license [See project license.](LICENSE).
 
 ## Don't forget to 🌟 Star 🌟 the repo if you like pre-commit-hooks
 
