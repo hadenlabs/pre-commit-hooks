@@ -7,6 +7,7 @@ if ! command -v golangci-lint >/dev/null 2>&1; then
   echo >&2 "Please install it by running 'go get -u github.com/golangci/golangci-lint/cmd/golangci-lint'"
   exit 1
 fi
+
 main() {
   initialize_
   parse_cmdline_ "$@"
@@ -33,12 +34,17 @@ initialize_() {
 
 parse_cmdline_() {
   declare argv
-  argv=$(getopt -o c:E:D:P:e --long config:,out-format:,print-issued-lines:,uniq-by-line:,sort-results:,path-prefix:,modules-download-mode:,issue-exit-code:,build-tags:,timeout:,no-config:,skip-dirs:,skip-dirs-use-default:,skip-files:,enable:,disable:,disable-all:,presets:,exclude:,exclude-use-default: -- "$@") || return
+  argv=$(getopt -o c:E:D:P:e --long fix:config:,out-format:,print-issued-lines:,uniq-by-line:,sort-results:,path-prefix:,modules-download-mode:,issue-exit-code:,build-tags:,timeout:,no-config:,skip-dirs:,skip-dirs-use-default:,skip-files:,enable:,disable:,disable-all:,presets:,exclude:,exclude-use-default: -- "$@") || return
 
   eval "set -- ${argv}"
 
   for argv; do
     case $argv in
+      --fix)
+        shift
+        ARGS+=("--fix")
+        shift
+        ;;
       -c | --config)
         shift
         ARGS+=("--config ${1}")
@@ -145,7 +151,7 @@ parse_cmdline_() {
 }
 
 golangcilint_() {
-  golangci-lint run "${ARGS[@]}"
+    eval golangci-lint run "${ARGS[@]}"
 }
 
 # global arrays
