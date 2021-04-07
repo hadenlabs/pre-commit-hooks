@@ -14,7 +14,7 @@ email:
 #logo: docs/logo.png
 
 # License of this project
-license: 'LGPLv3'
+license: 'LGPLV3'
 
 # Canonical GitHub repo
 github_repo: hadenlabs/pre-commit-hooks
@@ -22,17 +22,20 @@ github_repo: hadenlabs/pre-commit-hooks
 # Badges to display
 badges:
   - name: GitHub tag (latest SemVer)
-    image: 'https://img.shields.io/github/v/tag/hadenlabs/pre-commit-hooks.svg?label=latest&sort=semver'
-    url: 'https://github.com/hadenlabs/pre-commit-hooks/releases'
+    image: https://img.shields.io/github/v/tag/hadenlabs/pre-commit-hooks.svg?label=latest&sort=semver
+    url: https://github.com/hadenlabs/pre-commit-hooks/releases
   - name: Lint
-    image: 'https://github.com/hadenlabs/pre-commit-hooks/actions/workflows/lint.yml/badge.svg?branch=develop'
-    url: 'https://github.com/hadenlabs/pre-commit-hooks/actions'
-  - name: 'Issues'
-    image: 'https://img.shields.io/github/issues/hadenlabs/pre-commit-hooks.svg'
-    url: 'https://github.com/hadenlabs/pre-commit-hooks/issues'
-  - name: 'Latest Release'
-    image: 'https://img.shields.io/github/release/hadenlabs/pre-commit-hooks.svg'
-    url: 'https://github.com/hadenlabs/pre-commit-hooks/releases'
+    image: https://github.com/hadenlabs/pre-commit-hooks/actions/workflows/lint.yml/badge.svg?branch=develop
+    url: https://github.com/hadenlabs/pre-commit-hooks/actions
+  - name: Issues
+    image: https://img.shields.io/github/issues/hadenlabs/pre-commit-hooks.svg
+    url: https://github.com/hadenlabs/pre-commit-hooks/issues
+  - name: Latest Release
+    image: https://img.shields.io/github/release/hadenlabs/pre-commit-hooks.svg
+    url: https://github.com/hadenlabs/pre-commit-hooks/releases
+  - name: Beacon
+    image: https://ga-beacon.appspot.com/G-MZEK48EGE8/pre-commit-hooks/readme
+    url: https://github.com/hadenlabs/pre-commit-hooks
 
 # Short description of this project
 description: |-
