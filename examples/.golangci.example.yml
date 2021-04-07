@@ -25,7 +25,6 @@ issues:
     - path: _test\.go
       linters:
         - dupl
-        - scopelint
         - gochecknoglobals
         - gochecknoinits
         - unused
@@ -56,7 +55,6 @@ linters:
     - golint
     - govet
     - ineffassign
-    - interfacer
     - misspell
     - nakedret
     - prealloc
