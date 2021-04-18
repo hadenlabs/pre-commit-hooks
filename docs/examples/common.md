@@ -81,7 +81,6 @@ repos:
       - id: go-build
       - id: go-mod-tidy
       - id: go-mod-vendor
-      - id: go-mod-vendor
 ```
 
 ### check:
