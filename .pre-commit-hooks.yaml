@@ -231,7 +231,7 @@
   name: 'golangci-lint'
   description: Tests go files with `golangci-lint`
   entry: pre_commit_hooks/go/golangci-lint.sh
-  types: [go]
+  files: '\.go$'
   language: 'script'
   pass_filenames: false
 
