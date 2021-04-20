@@ -1,0 +1,12 @@
+# Docker Compose
+# https://docs.docker.com/compose/
+# Usage: docker-compose up
+---
+version: '3.6'
+
+services:
+  app:
+    environment: &environment
+      - STAGE=dev
+    volumes:
+      - .:/usr/src
