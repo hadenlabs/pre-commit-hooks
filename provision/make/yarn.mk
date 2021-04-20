@@ -37,7 +37,7 @@ yarn.setup:
 ## Setup environment nvm version node.
 .PHONY: yarn.environment
 yarn.environment:
-	@echo "==> enviroment yarn..."
+	@echo "==> environment yarn..."
 	nvm use ${NODE_VERSION}
 	@echo ${MESSAGE_HAPPY}
 
