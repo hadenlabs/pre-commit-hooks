@@ -296,6 +296,13 @@
   types: [file]
   files: Dockerfile(.*)
 
+- id: docker-compose-check
+  name: Validate docker-compose files
+  description: Checks that docker-compose files are valid
+  language: 'script'
+  entry: pre_commit_hooks/docker/docker-compose.sh
+  files: docker-compose.y[a]{0,1}ml$
+
 # leaks
 
 - id: gitleaks
