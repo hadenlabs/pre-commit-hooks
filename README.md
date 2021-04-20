@@ -186,6 +186,16 @@ repos:
       - id: hadolint
 ```
 
+### docker-compose:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.2.0
+    hooks:
+      - id: docker-compose-check
+```
+
 ### gitleaks:
 
 ```yaml
