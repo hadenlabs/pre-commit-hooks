@@ -362,7 +362,6 @@ repos:
         entry: pre_commit_hooks/go/golangci-lint.sh
         types: [go]
         language: 'script'
-        pass_filenames: false
 
       - id: go-critic
         name: 'go-critic'
