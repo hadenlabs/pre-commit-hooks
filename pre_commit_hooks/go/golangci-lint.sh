@@ -34,7 +34,7 @@ initialize_() {
 
 parse_cmdline_() {
   declare argv
-  argv=$(getopt -o c:E:D:P:e --long fix:config:,out-format:,print-issued-lines:,uniq-by-line:,sort-results:,path-prefix:,modules-download-mode:,issue-exit-code:,build-tags:,timeout:,no-config:,skip-dirs:,skip-dirs-use-default:,skip-files:,enable:,disable:,disable-all:,presets:,exclude:,exclude-use-default: -- "$@") || return
+  argv=$(getopt -o c:E:D:P:e --long fix:,config:,out-format:,print-issued-lines:,uniq-by-line:,sort-results:,path-prefix:,modules-download-mode:,issue-exit-code:,build-tags:,timeout:,no-config:,skip-dirs:,skip-dirs-use-default:,skip-files:,enable:,disable:,disable-all:,presets:,exclude:,exclude-use-default: -- "$@") || return
 
   eval "set -- ${argv}"
 
@@ -42,7 +42,7 @@ parse_cmdline_() {
     case $argv in
       --fix)
         shift
-        ARGS+=("--fix")
+        ARGS+=("--fix ${1}")
         shift
         ;;
       -c | --config)
@@ -143,6 +143,11 @@ parse_cmdline_() {
       --exclude-use-default)
         shift
         ARGS+=("--exclude-use-default ${1}")
+        shift
+        ;;
+      --)
+        shift
+        FILES=("${1}")
         break
         ;;
     esac
@@ -151,10 +156,13 @@ parse_cmdline_() {
 }
 
 golangcilint_() {
-    eval golangci-lint run "${ARGS[@]}"
+  for file_validate in "${FILES[@]}"; do
+    eval golangci-lint run "${ARGS[@]}" "${file_validate}"
+  done
 }
 
 # global arrays
 declare -a ARGS
+declare -a FILES
 
 [[ ${BASH_SOURCE[0]} != "$0" ]] || main "$@"
