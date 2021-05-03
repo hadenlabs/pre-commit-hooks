@@ -7,9 +7,9 @@
 keys.help:
 	@echo '    keys:'
 	@echo ''
-	@echo '        keys                      help keys'
+	@echo '        keys                     help keys'
 	@echo '        keys.openssl             make key openssl by stage'
-	@echo '        keys.pem                 make key openssl by stage'
+	@echo '        keys.pem                 make key rsa by stage'
 	@echo ''
 
 ## show help keys commands
@@ -24,11 +24,8 @@ keys.openssl:
 		echo "is neccesary add a stage"; \
 		exit 2; \
 	fi
-	mkdir -p ${KEYBASE_PATH}/${stage}/openssl/
-	openssl genrsa -out ${PROJECT}-${stage}.pem 2048
-	openssl rsa -in ${PROJECT}-${stage}.pem -pubout -out ${PROJECT}-${stage}.public.pem
-	mv ${PROJECT}-${stage}.pem ${KEYBASE_PATH}/${stage}/openssl/${PROJECT}-${stage}.pem
-	mv ${PROJECT}-${stage}.public.pem ${KEYBASE_PATH}/${stage}/openssl/${PROJECT}-${stage}.pem
+	@openssl genrsa -out ${PROJECT}-${stage}.pem 2048
+	@openssl rsa -in ${PROJECT}-${stage}.pem -pubout -out ${PROJECT}-${stage}.public.pem
 
 ## Generate key rsa pem
 .PHONY: keys.pem
