@@ -4,6 +4,7 @@
 
 FROM hairyhenderson/gomplate:v3.9.0 as gomplate
 FROM golangci/golangci-lint:v1.39.0 as golangci-lint
+FROM alpine/terragrunt:0.15.0 as hashicorp
 
 FROM golang:1.16.3-alpine3.13 as base
 
@@ -85,9 +86,15 @@ COPY --from=node /usr/local/bin/yarn /usr/local/bin/yarn
 COPY --from=node /usr/local/bin/markdown-link-check /usr/local/bin/markdown-link-check
 
 # go
+
 COPY --from=go-builder /go/bin/* /usr/local/bin/
 COPY --from=gomplate /gomplate /usr/local/bin/gomplate
 COPY --from=golangci-lint /usr/bin/golangci-lint /usr/local/bin/golangci-lint
+
+# terraform
+
+COPY --from=hashicorp /bin/terraform /usr/local/bin/
+COPY --from=hashicorp /usr/local/bin/terragrunt /usr/local/bin/
 
 # Reset the work dir
 WORKDIR /app
