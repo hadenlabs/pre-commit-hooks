@@ -13,3 +13,4 @@ libs/
 .terraform
 *.tpl.md
 *.enc.yaml
+vendor
