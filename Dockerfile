@@ -78,7 +78,9 @@ RUN apk add --no-cache \
     && apk add --no-cache --virtual .build-deps $BUILD_DEPS \
     # Install modules python
     && python3 -m pip install --user --upgrade --no-cache-dir $MODULES_PYTHON \
-    && apk del .build-deps
+    && apk del .build-deps \
+    && rm -rf /var/cache/apk/* \
+    && sed -i "s/root:\/root:\/bin\/ash/root:\/root:\/bin\/bash/g" /etc/passwd
 
 # node
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
@@ -98,3 +100,5 @@ COPY --from=hashicorp /usr/local/bin/terragrunt /usr/local/bin/
 
 # Reset the work dir
 WORKDIR /app
+
+CMD ["/bin/bash"]
