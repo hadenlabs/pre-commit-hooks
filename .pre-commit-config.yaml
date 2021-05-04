@@ -370,20 +370,6 @@ repos:
         files: '\.go$'
         language: 'script'
 
-      - id: go-unit-tests
-        name: 'go-unit-tests'
-        entry: pre_commit_hooks/go/go-unit-tests.sh
-        files: '\.go$'
-        language: 'script'
-        description: 'Runs `go test`'
-
-      - id: go-build
-        name: 'go-build'
-        entry: pre_commit_hooks/go/go-build.sh
-        files: '\.go$'
-        language: 'script'
-        description: 'Runs `go build`, requires golang'
-
       - id: go-mod-tidy
         name: 'go-mod-tidy'
         entry: pre_commit_hooks/go/go-mod-tidy.sh
