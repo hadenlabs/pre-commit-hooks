@@ -7,7 +7,6 @@ if ! command -v go >/dev/null 2>&1; then
   exit 1
 fi
 
-pkg=$(go list)
-for dir in $(echo "${@}"|xargs -n1 dirname|sort -u); do
-  go vet "${pkg}/${dir}"
+for file in $(echo "${@}" | sort -u); do
+  go vet "${file}"
 done
