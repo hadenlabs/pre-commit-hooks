@@ -57,3 +57,32 @@ func TestPreCommitHooksValidateTerraformSuccess(t *testing.T) {
 	assert.NotEmpty(t, outputListApps, outputListApps)
 	assert.Subset(t, strings.Split(outputListApps, "\n"), expectApps)
 }
+
+func TestPreCommitHooksValidateGoSuccess(t *testing.T) {
+	tag := "hadenlabs/pre-commit-hooks:latest"
+	otherOptions := []string{}
+	expectApps := []string{
+		"gocritic",
+		"gocyclo",
+		"goimports",
+		"golangci-lint",
+		"golint",
+	}
+
+	buildOptions := &docker.BuildOptions{
+		Tags:         []string{tag},
+		OtherOptions: otherOptions,
+	}
+
+	docker.Build(t, "../", buildOptions)
+	opts := &docker.RunOptions{
+		Command: []string{
+			"bash", "-c",
+			"compgen -c", "|",
+			"sort -u",
+		},
+	}
+	outputListApps := docker.Run(t, tag, opts)
+	assert.NotEmpty(t, outputListApps, outputListApps)
+	assert.Subset(t, strings.Split(outputListApps, "\n"), expectApps)
+}
