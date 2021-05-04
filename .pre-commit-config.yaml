@@ -324,17 +324,17 @@ repos:
         files: '\.go$'
         language: 'script'
 
-      - id: go-lint
+      - id: golint
         name: 'go lint'
         description: Tests go files with `golint`
-        entry: pre_commit_hooks/go/go-lint.sh
+        entry: pre_commit_hooks/go/golint.sh
         files: '\.go$'
         language: 'script'
 
-      - id: go-cyclo
-        name: 'go-cyclo'
+      - id: gocyclo
+        name: 'gocyclo'
         description: Tests go files with `gocyclo`
-        entry: pre_commit_hooks/go/go-cyclo.sh
+        entry: pre_commit_hooks/go/gocyclo.sh
         files: '\.go$'
         language: 'script'
         args: [-over=15]
