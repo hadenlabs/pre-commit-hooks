@@ -24,8 +24,8 @@ ENV MODULES_PYTHON \
 env MODULES_NODE \
     markdown-link-check
 
-FROM hairyhenderson/gomplate:3.9.0 as gomplate
-FROM golangci/golangci-lint:1.39.0 as golangci-lint
+FROM hairyhenderson/gomplate:v3.9.0 as gomplate
+FROM golangci/golangci-lint:v1.39.0 as golangci-lint
 
 FROM golang:1.16.3-alpine3.12 as go-builder
 
