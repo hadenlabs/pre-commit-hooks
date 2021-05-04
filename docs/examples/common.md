@@ -71,8 +71,8 @@ repos:
       - id: go-fmt
       - id: go-imports
       - id: go-vet
-      - id: go-lint
-      - id: go-cyclo
+      - id: golint
+      - id: gocyclo
       - id: validate-toml
       - id: no-go-testing
       - id: golangci-lint
