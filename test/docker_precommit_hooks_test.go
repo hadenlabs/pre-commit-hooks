@@ -11,9 +11,7 @@ import (
 
 func TestPreCommitHooksBuildSuccess(t *testing.T) {
 	tag := "hadenlabs/pre-commit-hooks:0.1.1"
-	otherOptions := []string{
-		"--no-cache",
-	}
+	otherOptions := []string{}
 
 	buildOptions := &docker.BuildOptions{
 		Tags:         []string{tag},
@@ -33,10 +31,38 @@ func TestPreCommitHooksBuildSuccess(t *testing.T) {
 }
 
 func TestPreCommitHooksValidateTerraformSuccess(t *testing.T) {
-	tag := "hadenlabs/pre-commit-hooks:latest"
+	tag := "hadenlabs/pre-commit-hooks:0.1.1"
 	otherOptions := []string{}
 	expectApps := []string{
 		"terraform",
+		"terraform-docs",
+		"tflint",
+		"tfsec",
+		"checkov",
+	}
+
+	buildOptions := &docker.BuildOptions{
+		Tags:         []string{tag},
+		OtherOptions: otherOptions,
+	}
+
+	docker.Build(t, "../", buildOptions)
+	opts := &docker.RunOptions{
+		Command: []string{
+			"bash", "-c",
+			"compgen -c", "|",
+			"sort -u",
+		},
+	}
+	outputListApps := docker.Run(t, tag, opts)
+	assert.NotEmpty(t, outputListApps, outputListApps)
+	assert.Subset(t, strings.Split(outputListApps, "\n"), expectApps)
+}
+
+func TestPreCommitHooksValidateTerragruntSuccess(t *testing.T) {
+	tag := "hadenlabs/pre-commit-hooks:0.1.1"
+	otherOptions := []string{}
+	expectApps := []string{
 		"terragrunt",
 	}
 
@@ -59,7 +85,7 @@ func TestPreCommitHooksValidateTerraformSuccess(t *testing.T) {
 }
 
 func TestPreCommitHooksValidateGoSuccess(t *testing.T) {
-	tag := "hadenlabs/pre-commit-hooks:latest"
+	tag := "hadenlabs/pre-commit-hooks:0.1.1"
 	otherOptions := []string{}
 	expectApps := []string{
 		"gocritic",
