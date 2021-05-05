@@ -10,7 +10,7 @@ import (
 )
 
 func TestPreCommitHooksBuildSuccess(t *testing.T) {
-	tag := "hadenlabs/pre-commit-hooks:0.1.1"
+	tag := "hadenlabs/pre-commit-hooks:latest"
 	otherOptions := []string{}
 
 	buildOptions := &docker.BuildOptions{
@@ -31,7 +31,7 @@ func TestPreCommitHooksBuildSuccess(t *testing.T) {
 }
 
 func TestPreCommitHooksValidateTerraformSuccess(t *testing.T) {
-	tag := "hadenlabs/pre-commit-hooks:0.1.1"
+	tag := "hadenlabs/pre-commit-hooks:latest"
 	otherOptions := []string{}
 	expectApps := []string{
 		"terraform",
@@ -60,7 +60,7 @@ func TestPreCommitHooksValidateTerraformSuccess(t *testing.T) {
 }
 
 func TestPreCommitHooksValidateTerragruntSuccess(t *testing.T) {
-	tag := "hadenlabs/pre-commit-hooks:0.1.1"
+	tag := "hadenlabs/pre-commit-hooks:latest"
 	otherOptions := []string{}
 	expectApps := []string{
 		"terragrunt",
@@ -85,7 +85,7 @@ func TestPreCommitHooksValidateTerragruntSuccess(t *testing.T) {
 }
 
 func TestPreCommitHooksValidateGoSuccess(t *testing.T) {
-	tag := "hadenlabs/pre-commit-hooks:0.1.1"
+	tag := "hadenlabs/pre-commit-hooks:latest"
 	otherOptions := []string{}
 	expectApps := []string{
 		"gocritic",
