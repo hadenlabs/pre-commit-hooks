@@ -13,10 +13,10 @@ ENV PATH $PATH:/root/.local/bin
 
 ENV BASE_DEPS \
     alpine-sdk \
-    bash \
-    build-base
+    bash
 
 ENV BUILD_DEPS \
+    build-base \
     fakeroot \
     freetype-dev \
     curl \
@@ -25,10 +25,10 @@ ENV BUILD_DEPS \
 
 ENV PERSIST_DEPS \
     git \
+    make \
     py3-pip \
     python3 \
     python3-dev \
-    make \
     shellcheck
 
 ENV MODULES_PYTHON \
@@ -90,8 +90,7 @@ RUN apk add --no-cache \
     && rm -rf /root/.cache \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/* \
-    && rm -rf /var/tmp/* \
-    && apk del build-base
+    && rm -rf /var/tmp/*
 
 # node
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
