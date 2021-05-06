@@ -32,6 +32,9 @@ GIT_IGNORES_CUSTOM:= bin
 
 GI:=gi
 
+# issues reviewers
+REVIEWERS?=luismayta
+
 # Configuration.
 SHELL ?=/bin/bash
 ROOT_DIR=$(shell pwd)
