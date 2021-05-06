@@ -3,6 +3,21 @@ default_language_version:
   python: python3.8.0
 
 repos:
+  - repo: https://github.com/pre-commit/pre-commit
+    rev: v2.12.1
+    hooks:
+      - id: validate_manifest
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.0.0
+    hooks:
+      - id: codespell
+        args: [--ignore-words=.codespell-ignores]
+        exclude: >
+          (?x)^(
+            .+\.vendor\/.*$|
+            .+\.node_modules\/.*$|
+            .+\.lock$|
+          )$
   - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
     rev: v1.2.1
     hooks:
@@ -66,8 +81,6 @@ repos:
       - id: file-contents-sorter
       - id: fix-encoding-pragma
       - id: sort-simple-yaml
-      - id: mixed-line-ending
-        fix: lr
       - id: check-executables-have-shebangs
   - repo: https://github.com/asottile/blacken-docs
     rev: v1.10.0
@@ -83,7 +96,6 @@ repos:
         entry: ./node_modules/prettier/bin-prettier.js
         args:
           - '--write=true'
-          - '--list-different'
           - '--config=.github/linters/prettier.config.js'
           - '--ignore-path=.github/linters/.prettierignore'
         files: \.(js|jsx|json|ts|tsx|mjs|d.ts|md|yml|yaml|gql|graphql|mjml)$
@@ -103,12 +115,15 @@ repos:
           )$
       - id: eslint
         name: eslint
-        language: system
-        pass_filenames: true
-        entry: node_modules/eslint/bin/eslint.js --config=.github/linters/.eslintrc.js --ignore-path=.github/linters/.eslintignore --color
+        language: node
+        entry: node_modules/eslint/bin/eslint.js
         args:
           - '--fix'
+          - '--color'
+          - '--config=.github/linters/.eslintrc.js'
+          - '--ignore-path=.github/linters/.eslintignore'
         files: \.(js|jsx|ts|tsx|mjs|d.ts)$
+        exclude: node_modules
       - id: stylint
         name: stylint
         language: system
