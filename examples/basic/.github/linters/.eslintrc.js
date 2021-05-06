@@ -2,16 +2,16 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   env: {
     node: true,
-    es2021: true,
+    es2021: true
   },
   parserOptions: {
     ecmaVersion: 6,
-    sourceType: 'module', // Allows for the use of imports
+    sourceType: 'module' // Allows for the use of imports
   },
   extends: [
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
-    'plugin:import/warnings',
+    'plugin:import/warnings'
   ],
   plugins: ['@typescript-eslint'],
   rules: {
@@ -22,7 +22,7 @@ module.exports = {
     'no-throw-literal': 'warn',
     curly: 'warn',
     eqeqeq: 'warn',
-    semi: 'off',
+    semi: 'off'
   },
-  ignorePatterns: ['**/*.d.ts'],
+  ignorePatterns: ['**/*.d.ts']
 }
