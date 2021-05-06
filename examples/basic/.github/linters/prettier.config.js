@@ -16,8 +16,8 @@ module.exports = {
         singleQuote: true,
         quoteProps: 'as-needed',
         tabWidth: 2,
-        trailingComma: 'none',
-      },
+        trailingComma: 'none'
+      }
     },
     {
       files: '{*.json,.*.json,**/.vscode/*.json,**/tsconfig.json,**/tsconfig.*.json}',
@@ -25,8 +25,8 @@ module.exports = {
         parser: 'json',
         tabWidth: 2,
         quoteProps: 'preserve',
-        singleQuote: false,
-      },
+        singleQuote: false
+      }
     },
     {
       files: '*.md',
@@ -35,8 +35,8 @@ module.exports = {
         printWidth: 120,
         proseWrap: 'never',
         semi: false,
-        trailingComma: 'none',
-      },
+        trailingComma: 'none'
+      }
     },
     {
       files: '*.mdx',
@@ -44,22 +44,22 @@ module.exports = {
         printWidth: 120,
         proseWrap: 'never',
         semi: false,
-        trailingComma: 'none',
-      },
+        trailingComma: 'none'
+      }
     },
     {
       files: '*.{sass,scss}',
       options: {
-        parser: 'scss',
-      },
+        parser: 'scss'
+      }
     },
     {
       files: '*.less',
       options: {
         tabWidth: 4,
         printWidth: 80,
-        parser: 'less',
-      },
-    },
-  ],
+        parser: 'less'
+      }
+    }
+  ]
 }
