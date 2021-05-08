@@ -1,7 +1,3 @@
-default_language_version:
-  # force all unspecified python hooks to run python3
-  python: python3.8.0
-
 repos:
   - repo: https://github.com/pre-commit/pre-commit
     rev: v2.12.1
@@ -23,13 +19,13 @@ repos:
     hooks:
       - id: python-safety-dependencies-check
   - repo: https://github.com/Lucas-C/pre-commit-hooks-bandit
-    rev: v1.0.4
+    rev: v1.0.5
     hooks:
       - id: python-bandit-vulnerability-check
         args: []
         files: .py$
   - repo: https://github.com/pre-commit/mirrors-pylint
-    rev: v3.0.0a1
+    rev: v3.0.0a3
     hooks:
       - id: pylint
         exclude: __pycache__|migrations|conf.py|_build|.tox|pootle/static|pootle/translations|pootle/locale|pootle/assets|templates
@@ -38,7 +34,7 @@ repos:
           - --disable=no-name-in-module,import-error,ungrouped-imports
           - --ignore=settings_test, migrations
   - repo: https://github.com/ambv/black
-    rev: 20.8b1
+    rev: 21.5b0
     hooks:
       - id: black
   - repo: https://gitlab.com/pycqa/flake8
@@ -113,6 +109,7 @@ repos:
             .+\.vendor\/.*$|
             .+\.terraform\/.*$|
           )$
+        minimum_pre_commit_version: 0.15.0
       - id: eslint
         name: eslint
         language: node
@@ -131,37 +128,6 @@ repos:
         entry: node_modules/stylelint/bin/stylelint.js --config=.github/linters/.stylintrc --syntax less **/*.less
         args: [--fix]
         files: \.(css|scss|sass|less)$
-
-      - id: checkov
-        name: Checkov
-        description: Runs checkov on Terraform templates.
-        entry: pre_commit_hooks/terraform/checkov.sh
-        language: script
-        pass_filenames: false
-        always_run: false
-        files: \.tf$
-        exclude: >
-          (?x)^(
-            .+\.vendor\/.*$|
-            .+\.terraform\/.*$|
-          )$
-        minimum_pre_commit_version: 0.15.0
-
-      - id: markdown-link-check
-        name: markdown-link-check
-        description: Markdown-link-check checks all of the hyperlinks in a markdown text to determine if they are alive or dead.
-        entry: pre_commit_hooks/markdown/markdown-link-check.sh
-        language: script
-        files: \.md$
-        args: []
-        exclude: >
-          (?x)^(
-            .+\.vendor\/.*$|
-            .+\.terraform\/.*$|
-          )$
-        minimum_pre_commit_version: 0.15.0
-
-      # Checkov specific hooks
 
       - id: checkov
         name: Checkov
