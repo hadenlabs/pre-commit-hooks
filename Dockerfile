@@ -58,6 +58,7 @@ RUN apk --no-cache add \
     && go get -u -v github.com/fzipp/gocyclo/cmd/gocyclo \
     && go get -u -v github.com/terraform-docs/terraform-docs@v0.13.0 \
     && go get -u -v github.com/tfsec/tfsec/cmd/tfsec \
+    && go get -u -v github.com/zricethezav/gitleaks/v7 \
     && go get -u -v github.com/go-critic/go-critic/cmd/gocritic
 
 FROM node:14.16.1-alpine3.13 as node

@@ -9,12 +9,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+const imageTag string = "hadenlabs/pre-commit-hooks:latest"
+
 func TestPreCommitHooksBuildSuccess(t *testing.T) {
-	tag := "hadenlabs/pre-commit-hooks:latest"
 	otherOptions := []string{}
 
 	buildOptions := &docker.BuildOptions{
-		Tags:         []string{tag},
+		Tags:         []string{imageTag},
 		OtherOptions: otherOptions,
 	}
 
@@ -26,12 +27,11 @@ func TestPreCommitHooksBuildSuccess(t *testing.T) {
 			"sort -u",
 		},
 	}
-	outputListApps := docker.Run(t, tag, opts)
+	outputListApps := docker.Run(t, imageTag, opts)
 	assert.NotEmpty(t, outputListApps, outputListApps)
 }
 
 func TestPreCommitHooksValidateTerraformSuccess(t *testing.T) {
-	tag := "hadenlabs/pre-commit-hooks:latest"
 	otherOptions := []string{}
 	expectApps := []string{
 		"terraform",
@@ -42,7 +42,7 @@ func TestPreCommitHooksValidateTerraformSuccess(t *testing.T) {
 	}
 
 	buildOptions := &docker.BuildOptions{
-		Tags:         []string{tag},
+		Tags:         []string{imageTag},
 		OtherOptions: otherOptions,
 	}
 
@@ -54,20 +54,19 @@ func TestPreCommitHooksValidateTerraformSuccess(t *testing.T) {
 			"sort -u",
 		},
 	}
-	outputListApps := docker.Run(t, tag, opts)
+	outputListApps := docker.Run(t, imageTag, opts)
 	assert.NotEmpty(t, outputListApps, outputListApps)
 	assert.Subset(t, strings.Split(outputListApps, "\n"), expectApps)
 }
 
 func TestPreCommitHooksValidateTerragruntSuccess(t *testing.T) {
-	tag := "hadenlabs/pre-commit-hooks:latest"
 	otherOptions := []string{}
 	expectApps := []string{
 		"terragrunt",
 	}
 
 	buildOptions := &docker.BuildOptions{
-		Tags:         []string{tag},
+		Tags:         []string{imageTag},
 		OtherOptions: otherOptions,
 	}
 
@@ -79,13 +78,12 @@ func TestPreCommitHooksValidateTerragruntSuccess(t *testing.T) {
 			"sort -u",
 		},
 	}
-	outputListApps := docker.Run(t, tag, opts)
+	outputListApps := docker.Run(t, imageTag, opts)
 	assert.NotEmpty(t, outputListApps, outputListApps)
 	assert.Subset(t, strings.Split(outputListApps, "\n"), expectApps)
 }
 
 func TestPreCommitHooksValidateGoSuccess(t *testing.T) {
-	tag := "hadenlabs/pre-commit-hooks:latest"
 	otherOptions := []string{}
 	expectApps := []string{
 		"gocritic",
@@ -96,7 +94,7 @@ func TestPreCommitHooksValidateGoSuccess(t *testing.T) {
 	}
 
 	buildOptions := &docker.BuildOptions{
-		Tags:         []string{tag},
+		Tags:         []string{imageTag},
 		OtherOptions: otherOptions,
 	}
 
@@ -108,7 +106,31 @@ func TestPreCommitHooksValidateGoSuccess(t *testing.T) {
 			"sort -u",
 		},
 	}
-	outputListApps := docker.Run(t, tag, opts)
+	outputListApps := docker.Run(t, imageTag, opts)
+	assert.NotEmpty(t, outputListApps, outputListApps)
+	assert.Subset(t, strings.Split(outputListApps, "\n"), expectApps)
+}
+
+func TestPreCommitHooksValidateLeaksSuccess(t *testing.T) {
+	otherOptions := []string{}
+	expectApps := []string{
+		"gitleaks",
+	}
+
+	buildOptions := &docker.BuildOptions{
+		Tags:         []string{imageTag},
+		OtherOptions: otherOptions,
+	}
+
+	docker.Build(t, "../", buildOptions)
+	opts := &docker.RunOptions{
+		Command: []string{
+			"bash", "-c",
+			"compgen -c", "|",
+			"sort -u",
+		},
+	}
+	outputListApps := docker.Run(t, imageTag, opts)
 	assert.NotEmpty(t, outputListApps, outputListApps)
 	assert.Subset(t, strings.Split(outputListApps, "\n"), expectApps)
 }
