@@ -145,11 +145,6 @@ parse_cmdline_() {
         ARGS+=("--exclude-use-default ${1}")
         shift
         ;;
-      --)
-        shift
-        FILES=("${1}")
-        break
-        ;;
     esac
   done
 
