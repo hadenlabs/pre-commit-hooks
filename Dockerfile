@@ -16,9 +16,6 @@ ENV BUILD_DEPS \
     curl \
     openssl
 
-ENV PERSIST_DEPS \
-    git
-
 FROM base as go-builder
 
 RUN apk --no-cache add \
@@ -41,9 +38,10 @@ RUN apk add --no-cache \
     # Install modules node
     && yarn global add $MODULES_NODE
 
-FROM python:3.8-alpine3.13 as python-builder
+FROM base as crossref
 
 ENV PERSIST_DEPS \
+    git \
     py3-pip \
     python3 \
     python3-dev
@@ -51,13 +49,8 @@ ENV PERSIST_DEPS \
 ENV MODULES_PYTHON \
     pre-commit
 
-ENV BUILD_DEPS \
-    build-base \
-    fakeroot \
-    curl \
-    openssl
-
 RUN apk add --no-cache \
+    $BASE_DEPS \
     $PERSIST_DEPS \
     && apk add --no-cache --virtual .build-deps $BUILD_DEPS \
     && ln -sf /usr/bin/python3 /usr/bin/python \
@@ -71,28 +64,10 @@ RUN apk add --no-cache \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/*
 
-FROM base as crossref
-
-RUN apk add --no-cache \
-    $BASE_DEPS \
-    $PERSIST_DEPS \
-    && apk add --no-cache --virtual .build-deps $BUILD_DEPS \
-    && sed -i "s/root:\/root:\/bin\/ash/root:\/root:\/bin\/bash/g" /etc/passwd \
-    && apk del .build-deps \
-    && rm -rf /root/.cache \
-    && rm -rf /var/cache/apk/* \
-    && rm -rf /tmp/* \
-    && rm -rf /var/tmp/*
-
 # node
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/bin/yarn /usr/local/bin/yarn
 COPY --from=node /usr/local/bin/markdown-link-check /usr/local/bin/markdown-link-check
-
-# python
-COPY --from=python-builder /usr/bin/python /usr/bin/
-COPY --from=python-builder /usr/bin/pip /usr/bin/
-COPY --from=python-builder /root/.local/bin/pre-commit /usr/local/bin/
 
 # go
 COPY --from=go-builder /go/bin/* /usr/local/bin/
