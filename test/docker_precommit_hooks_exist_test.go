@@ -26,9 +26,35 @@ func TestPreCommitHooksBuildSuccess(t *testing.T) {
 			"compgen -c", "|",
 			"sort -u",
 		},
+		Remove: true,
 	}
 	outputListApps := docker.Run(t, imageTag, opts)
 	assert.NotEmpty(t, outputListApps, outputListApps)
+}
+
+func TestPreCommitHooksValidatePreCommitSuccess(t *testing.T) {
+	otherOptions := []string{}
+	expectApps := []string{
+		"pre-commit",
+	}
+
+	buildOptions := &docker.BuildOptions{
+		Tags:         []string{imageTag},
+		OtherOptions: otherOptions,
+	}
+
+	docker.Build(t, "../", buildOptions)
+	opts := &docker.RunOptions{
+		Command: []string{
+			"bash", "-c",
+			"compgen -c", "|",
+			"sort -u",
+		},
+		Remove: true,
+	}
+	outputListApps := docker.Run(t, imageTag, opts)
+	assert.NotEmpty(t, outputListApps, outputListApps)
+	assert.Subset(t, strings.Split(outputListApps, "\n"), expectApps)
 }
 
 func TestPreCommitHooksValidateTerraformSuccess(t *testing.T) {
@@ -53,6 +79,7 @@ func TestPreCommitHooksValidateTerraformSuccess(t *testing.T) {
 			"compgen -c", "|",
 			"sort -u",
 		},
+		Remove: true,
 	}
 	outputListApps := docker.Run(t, imageTag, opts)
 	assert.NotEmpty(t, outputListApps, outputListApps)
@@ -77,6 +104,7 @@ func TestPreCommitHooksValidateTerragruntSuccess(t *testing.T) {
 			"compgen -c", "|",
 			"sort -u",
 		},
+		Remove: true,
 	}
 	outputListApps := docker.Run(t, imageTag, opts)
 	assert.NotEmpty(t, outputListApps, outputListApps)
@@ -105,6 +133,7 @@ func TestPreCommitHooksValidateGoSuccess(t *testing.T) {
 			"compgen -c", "|",
 			"sort -u",
 		},
+		Remove: true,
 	}
 	outputListApps := docker.Run(t, imageTag, opts)
 	assert.NotEmpty(t, outputListApps, outputListApps)
@@ -129,6 +158,7 @@ func TestPreCommitHooksValidateLeaksSuccess(t *testing.T) {
 			"compgen -c", "|",
 			"sort -u",
 		},
+		Remove: true,
 	}
 	outputListApps := docker.Run(t, imageTag, opts)
 	assert.NotEmpty(t, outputListApps, outputListApps)
