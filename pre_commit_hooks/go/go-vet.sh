@@ -7,6 +7,4 @@ if ! command -v go >/dev/null 2>&1; then
   exit 1
 fi
 
-for file in $(echo "${@}" | sort -u); do
-  go vet "${file}"
-done
+go vet ./...

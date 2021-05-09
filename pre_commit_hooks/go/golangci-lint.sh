@@ -156,13 +156,10 @@ parse_cmdline_() {
 }
 
 golangcilint_() {
-  for file_validate in "${FILES[@]}"; do
-    eval golangci-lint run "${ARGS[@]}" "${file_validate}"
-  done
+  eval golangci-lint run "${ARGS[@]}"
 }
 
 # global arrays
 declare -a ARGS
-declare -a FILES
 
 [[ ${BASH_SOURCE[0]} != "$0" ]] || main "$@"
