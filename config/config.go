@@ -4,13 +4,9 @@ import (
 	"github.com/hadenlabs/pre-commit-hooks/internal/errors"
 )
 
-const (
-	imageName string = "hadenlabs/pre-commit-hooks"
-)
-
 // Config struct field.
 type Config struct {
-	image string
+	Docker Docker
 }
 
 // Configurer methods for config.
@@ -20,7 +16,7 @@ type Configurer interface {
 
 // ReadConfig read values and files for config.
 func (c *Config) ReadConfig() (*Config, error) {
-	c.image = imageName
+	c.Docker.TargetImage = targetImage
 	return c, nil
 }
 
