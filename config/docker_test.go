@@ -10,3 +10,8 @@ func TestDockerTargetImage(t *testing.T) {
 	conf := Initialize()
 	assert.Equal(t, "hadenlabs/pre-commit-hooks", conf.Docker.TargetImage)
 }
+
+func TestDockerTag(t *testing.T) {
+	conf := Initialize()
+	assert.NotEmpty(t, conf.Docker.Tag)
+}
