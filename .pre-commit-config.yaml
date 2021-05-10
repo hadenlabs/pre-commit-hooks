@@ -311,6 +311,10 @@ repos:
         entry: pre_commit_hooks/go/go-mod-tidy.sh
         files: '\.go$'
         language: 'script'
+        exclude: >
+          (?x)^(
+            .+\.terraform\/.*$|
+          )$
         description: 'Runs `go mod tidy -v`, requires golang'
 
       - id: go-mod-vendor
@@ -318,6 +322,10 @@ repos:
         entry: pre_commit_hooks/go/go-mod-vendor.sh
         files: '\.go$'
         language: 'script'
+        exclude: >
+          (?x)^(
+            .+\.terraform\/.*$|
+          )$
         description: 'Runs `go mod vendor`, requires golang'
 
       # todocheck specific hooks
