@@ -18,8 +18,10 @@ type Configurer interface {
 
 // ReadConfig read values and files for config.
 func (c *Config) ReadConfig() (*Config, error) {
+	tag := version.Short()
 	c.Docker.TargetImage = targetImage
-	c.App.Version = version.Short()
+	c.Docker.Tag = tag
+	c.App.Version = tag
 	return c, nil
 }
 
