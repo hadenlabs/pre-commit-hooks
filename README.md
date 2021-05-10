@@ -14,7 +14,7 @@
 
 # pre-commit-hooks
 
-[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/hadenlabs/pre-commit-hooks.svg?label=latest&sort=semver)](https://github.com/hadenlabs/pre-commit-hooks/releases) [![Lint](https://github.com/hadenlabs/pre-commit-hooks/actions/workflows/lint.yml/badge.svg?branch=develop)](https://github.com/hadenlabs/pre-commit-hooks/actions) [![Issues](https://img.shields.io/github/issues/hadenlabs/pre-commit-hooks.svg)](https://github.com/hadenlabs/pre-commit-hooks/issues) [![Latest Release](https://img.shields.io/github/release/hadenlabs/pre-commit-hooks.svg)](https://github.com/hadenlabs/pre-commit-hooks/releases) [![Beacon](https://ga-beacon.appspot.com/G-MZEK48EGE8/pre-commit-hooks/readme)](https://github.com/hadenlabs/pre-commit-hooks)
+[![GitHub release](https://img.shields.io/github/release/hadenlabs/pre-commit-hooks?style=flat-square)](https://github.com/hadenlabs/pre-commit-hooks/releases/latest) [![Lint](https://img.shields.io/github/workflow/status/hadenlabs/pre-commit-hooks/lint-code)](https://github.com/hadenlabs/pre-commit-hooks/actions?workflow=lint-code) [![CI](https://img.shields.io/github/workflow/status/hadenlabs/pre-commit-hooks/ci)](https://github.com/hadenlabs/pre-commit-hooks/actions?workflow=ci) [![Test](https://img.shields.io/github/workflow/status/hadenlabs/pre-commit-hooks/test)](https://github.com/hadenlabs/pre-commit-hooks/actions?workflow=test) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow)](https://conventionalcommits.org) [![KeepAChangelog](https://img.shields.io/badge/Keep%20A%20Changelog-1.0.0-%23E05735)](https://keepachangelog.com) [![Beacon](https://ga-beacon.appspot.com/G-MZEK48EGE8/pre-commit-hooks/readme)](https://github.com/hadenlabs/pre-commit-hooks)
 
 This repository is a collection of Git hooks to be used with the [pre-commit](https://pre-commit.com/) framework.
 
@@ -27,7 +27,7 @@ This repository is a collection of Git hooks to be used with the [pre-commit](ht
 - [Shellcheck](https://github.com/koalaman/shellcheck)
 - [Hadolint](https://github.com/hadolint/hadolint)
 
-## To-do
+## TODO
 
 - [chore: implement hook gnu make](https://github.com/hadenlabs/pre-commit-hooks/issues/2)
 
