@@ -21,9 +21,9 @@
     "ncu:patch": "ncu -u --target patch",
     "prebuild": "mkdirp build && yarn run clean:build:all",
     "precommit": "lint-staged",
-    "prettier": "prettier --config=.github/linters/prettier.config.js --ignore-path=.github/linters/.prettierignore",
+    "prettier": "prettier --config=.github/linters/prettier.config.js --ignore-path=.github/linters/.prettierignore --list-different",
     "prettier:fix": "yarn prettier:lint --write=true",
-    "prettier:lint": "yarn prettier '**/*.{js?(on),ts?(x),scss,md,y?(a)ml,gql,graphql?(s),less,mjml}' --write=false --list-different"
+    "prettier:lint": "yarn prettier '**/*.{js?(on),ts?(x),scss,md,y?(a)ml,gql,graphql?(s),less,mjml}' --write=false"
   },
   "publishConfig": {
     "access": "public",
