@@ -5,6 +5,8 @@ import (
 	"github.com/hadenlabs/pre-commit-hooks/internal/version"
 )
 
+const tagLatest string = "latest"
+
 // Config struct field.
 type Config struct {
 	Docker Docker
@@ -21,6 +23,7 @@ func (c *Config) ReadConfig() (*Config, error) {
 	tag := version.Short()
 	c.Docker.TargetImage = targetImage
 	c.Docker.Tag = tag
+	c.Docker.TagLatest = tagLatest
 	c.App.Version = tag
 	return c, nil
 }
