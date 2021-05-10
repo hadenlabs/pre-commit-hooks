@@ -8,9 +8,9 @@ import (
 
 func TestInitialize(t *testing.T) {
 	conf := Initialize()
-	assert.Equal(t, "hadenlabs/pre-commit-hooks", conf.image)
+	assert.IsType(t, &Config{}, conf)
 }
 
 func TestNewConfig(t *testing.T) {
-	assert.Equal(t, &Config{}, New())
+	assert.IsType(t, &Config{}, New())
 }
