@@ -1,0 +1,46 @@
+name: ci
+on:
+  workflow_run:
+    workflows: ['test']
+    types:
+      - completed
+
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+      # https://semver.org/ proper release tags, more or less
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      # prerelease tags, more or less
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'
+env:
+  IMAGE_NAME: 'hadenlabs/pre-commit-hooks'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out a copy of the repo
+        uses: actions/checkout@v2
+      - name: set up qemu
+        uses: docker/setup-qemu-action@v1
+      - name: get tag version
+        id: get_version
+        run: |
+          echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      - name: set up docker buildx
+        uses: docker/setup-buildx-action@v1
+      - name: login to dockerhub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            ${{ env.IMAGE_NAME }}:latest
+      - name: image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
