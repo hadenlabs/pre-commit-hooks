@@ -49,6 +49,8 @@ repos:
     rev: 0.2.0
     hooks:
       - id: markdown-link-check
+        args:
+          - '--config=markdown-config.json'
 ```
 
 ### shell:
