@@ -57,10 +57,12 @@ repos:
         entry: pre_commit_hooks/markdown/markdown-link-check.sh
         language: script
         files: \.md$
-        args: []
+        args:
+          - --config=.github/linters/markdown-link-config.json
         exclude: >
           (?x)^(
             .+\.tpl.md$|
+            .+\.cache\/.*$|
             .+\.vendor\/.*$|
             .+\.terraform\/.*$|
           )$
