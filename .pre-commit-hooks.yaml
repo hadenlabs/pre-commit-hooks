@@ -12,6 +12,9 @@
   args: []
   exclude: >
     (?x)^(
+      .+\.tpl.md$|
+      .+\.node_modules\/.*$|
+      .+\.cache\/.*$|
       .+\.vendor\/.*$|
       .+\.terraform\/.*$|
     )$
