@@ -21,9 +21,9 @@ github_repo: hadenlabs/pre-commit-hooks
 
 # Badges to display
 badges:
-  - name: GitHub release
-    image: https://img.shields.io/github/release/hadenlabs/pre-commit-hooks?style=flat-square
-    url: https://github.com/hadenlabs/pre-commit-hooks/releases/latest
+  - name: Latest Release
+    image: https://img.shields.io/github/release/hadenlabs/zsh-hacker
+    url: https://github.com/hadenlabs/zsh-hacker/releases
   - name: Lint
     image: https://img.shields.io/github/workflow/status/hadenlabs/pre-commit-hooks/lint-code
     url: https://github.com/hadenlabs/pre-commit-hooks/actions?workflow=lint-code
@@ -42,9 +42,6 @@ badges:
   - name: KeepAChangelog
     image: https://img.shields.io/badge/Keep%20A%20Changelog-1.0.0-%23E05735
     url: https://keepachangelog.com
-  - name: Beacon
-    image: https://ga-beacon.appspot.com/G-MZEK48EGE8/pre-commit-hooks/readme
-    url: https://github.com/hadenlabs/pre-commit-hooks
 
 # Short description of this project
 description: |-
