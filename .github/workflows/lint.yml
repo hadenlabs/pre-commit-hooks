@@ -12,6 +12,9 @@ on:
     branches:
       - develop
 
+env:
+  IMAGE_NAME: 'hadenlabs/pre-commit-hooks'
+
 jobs:
   pre-commit:
     runs-on: ubuntu-20.04
@@ -19,6 +22,10 @@ jobs:
       - name: Checkout
         if: ${{ !env.ACT }}
         uses: actions/checkout@v2
-      - uses: hadenlabs/action-pre-commit@0.1.2
-        with:
-          args: run --all-files
+      - name: generate image docker
+        if: ${{ !env.ACT }}
+        run: |
+          docker build --no-cache ./ --tag ${{ env.IMAGE_NAME }}:latest
+      - name: validate files
+        run: |
+          docker run --rm -it --volume $PWD:/data ${{ env.IMAGE_NAME }}:latest pre-commit run --all-files
