@@ -2,7 +2,7 @@
 # Dockerfile for pre-commit-hooks
 #
 
-FROM golangci/golangci-lint:1.41.1 as build-golangcilint
+FROM golangci/golangci-lint:v1.41.1 as build-golangcilint
 
 FROM hadolint/hadolint:2.6.0 as build-hadolint
 
