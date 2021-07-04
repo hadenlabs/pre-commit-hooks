@@ -28,4 +28,4 @@ jobs:
           docker build --no-cache ./ --tag ${{ env.IMAGE_NAME }}:latest
       - name: validate files
         run: |
-          docker run --rm -it --volume $PWD:/data ${{ env.IMAGE_NAME }}:latest pre-commit run --all-files
+          docker run --rm --volume $PWD:/data ${{ env.IMAGE_NAME }}:latest pre-commit run --all-files
