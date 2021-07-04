@@ -8,9 +8,10 @@ package-lock.json
 coverage
 .mypy_cache/
 .build
-libs/github.com/*
-libs/
 .terraform
+terraform.md
 *.tpl.md
 *.enc.yaml
 vendor
+out
+.vscode-test
