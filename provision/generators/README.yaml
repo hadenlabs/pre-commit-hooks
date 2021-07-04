@@ -22,8 +22,8 @@ github_repo: hadenlabs/pre-commit-hooks
 # Badges to display
 badges:
   - name: Latest Release
-    image: https://img.shields.io/github/release/hadenlabs/zsh-hacker
-    url: https://github.com/hadenlabs/zsh-hacker/releases
+    image: https://img.shields.io/github/release/hadenlabs/pre-commit-hooks
+    url: https://github.com/hadenlabs/pre-commit-hooks/releases
   - name: Lint
     image: https://img.shields.io/github/workflow/status/hadenlabs/pre-commit-hooks/lint-code
     url: https://github.com/hadenlabs/pre-commit-hooks/actions?workflow=lint-code
