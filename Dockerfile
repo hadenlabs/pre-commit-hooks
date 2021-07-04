@@ -2,6 +2,8 @@
 # Dockerfile for pre-commit-hooks
 #
 
+FROM hadolint/hadolint:2.6.0 as build-hadolint
+
 FROM hadenlabs/build-tools:0.1.0 as base
 
 ENV PATH $PATH:/go/bin:/usr/local/go/bin:/root/.local/bin:/usr/bin
@@ -45,6 +47,8 @@ ENV MODULES_PYTHON \
 ENV MODULES_NODE \
     markdown-link-check
 
+ENV PATH $PATH:/go/bin:/usr/local/go/bin:/root/.local/bin:/usr/bin:/usr/local/bin
+
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
     $BUILD_DEPS \
@@ -67,6 +71,9 @@ RUN apt-get update -y \
 
 # go
 COPY --from=go-builder /go/bin/* /go/bin/
+
+# hadolint
+COPY --from=build-hadolint /bin/hadolint /usr/local/bin/
 
 # Reset the work dir
 WORKDIR /data
