@@ -47,6 +47,10 @@ ENV MODULES_PYTHON \
 ENV MODULES_NODE \
     markdown-link-check
 
+
+ENV MODULES_GO \
+    github.com/golangci/golangci-lint/cmd/golangci-lint
+
 ENV PATH $PATH:/go/bin:/usr/local/go/bin:/root/.local/bin:/usr/bin:/usr/local/bin
 
 RUN apt-get update -y \
@@ -64,6 +68,8 @@ RUN apt-get update -y \
     && python -m pip install --user --no-cache-dir $MODULES_PYTHON \
     # Install modules node
     && yarn global add $MODULES_NODE \
+    # Install modules go
+    && go get -u -v $MODULES_GO \
     && sed -i "s/root:\/root:\/bin\/ash/root:\/root:\/bin\/bash/g" /etc/passwd \
     && apt-get clean \
     && apt-get purge -y \
@@ -71,6 +77,7 @@ RUN apt-get update -y \
 
 # go
 COPY --from=go-builder /go/bin/* /go/bin/
+COPY --from=go-builder /usr/local/go/bin/* /usr/local/go/bin/
 
 # hadolint
 COPY --from=build-hadolint /bin/hadolint /usr/local/bin/
