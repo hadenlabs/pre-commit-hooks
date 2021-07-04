@@ -25,7 +25,6 @@ AWS_VAULT ?= ${TEAM}
 PROJECT := pre-commit-hooks
 
 PYTHON_VERSION=3.8.0
-NODE_VERSION=14.16.1
 PYENV_NAME="${PROJECT}"
 GIT_IGNORES:=python,node,go,docker
 GIT_IGNORES_CUSTOM:= bin
@@ -81,7 +80,6 @@ setup:
 	make python.setup
 	make python.precommit
 	@[ -e ".env" ] || cp -rf .env.example .env
-	make yarn.setup
 	make git.setup
 	make go.setup
 	@echo ${MESSAGE_HAPPY}
