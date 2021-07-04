@@ -81,7 +81,7 @@ Please see the [documentation](https://pre-commit.com/#usage) for further inform
 ```yaml
   repos:
     - repo: https://github.com/hadenlabs/pre-commit-hooks
-      rev: 0.2.0
+      rev: 0.3.0
       hooks:
         - id: terraform-fmt
         - id: terraform-validate
@@ -117,7 +117,7 @@ pre-commit run terraform-validate --all-files
 ```yaml
 repos:
   - repo: https://github.com/hadenlabs/pre-commit-hooks
-    rev: 0.2.0
+    rev: 0.3.0
     hooks:
       - id: terraform-fmt
       - id: terraform-validate
@@ -137,7 +137,7 @@ repos:
 ```yaml
 repos:
   - repo: https://github.com/hadenlabs/pre-commit-hooks
-    rev: 0.2.0
+    rev: 0.3.0
     hooks:
       - id: terragrunt-fmt
       - id: terraform-validate
@@ -148,7 +148,7 @@ repos:
 ```yaml
 repos:
   - repo: https://github.com/hadenlabs/pre-commit-hooks
-    rev: 0.2.0
+    rev: 0.3.0
     hooks:
       - id: markdown-link-check
         args:
@@ -160,7 +160,7 @@ repos:
 ```yaml
 repos:
   - repo: https://github.com/hadenlabs/pre-commit-hooks
-    rev: 0.2.0
+    rev: 0.3.0
     hooks:
       - id: shellcheck
 ```
@@ -170,7 +170,7 @@ repos:
 ```yaml
 repos:
   - repo: https://github.com/hadenlabs/pre-commit-hooks
-    rev: 0.2.0
+    rev: 0.3.0
     hooks:
       - id: go-fmt
       - id: go-imports
@@ -192,7 +192,7 @@ repos:
 ```yaml
 repos:
   - repo: https://github.com/hadenlabs/pre-commit-hooks
-    rev: 0.2.0
+    rev: 0.3.0
     hooks:
       - id: todocheck
 ```
@@ -202,7 +202,7 @@ repos:
 ```yaml
 repos:
   - repo: https://github.com/hadenlabs/pre-commit-hooks
-    rev: 0.2.0
+    rev: 0.3.0
     hooks:
       - id: do-not-commit
 ```
@@ -212,7 +212,7 @@ repos:
 ```yaml
 repos:
   - repo: https://github.com/hadenlabs/pre-commit-hooks
-    rev: 0.2.0
+    rev: 0.3.0
     hooks:
       - id: hadolint
 ```
@@ -222,7 +222,7 @@ repos:
 ```yaml
 repos:
   - repo: https://github.com/hadenlabs/pre-commit-hooks
-    rev: 0.2.0
+    rev: 0.3.0
     hooks:
       - id: docker-compose-check
 ```
@@ -232,7 +232,7 @@ repos:
 ```yaml
 repos:
   - repo: https://github.com/hadenlabs/pre-commit-hooks
-    rev: 0.2.0
+    rev: 0.3.0
     hooks:
       - id: gitleaks
         args:
