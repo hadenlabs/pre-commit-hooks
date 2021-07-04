@@ -2,6 +2,8 @@
 # Dockerfile for pre-commit-hooks
 #
 
+FROM golangci/golangci-lint:1.41.1 as build-golangcilint
+
 FROM hadolint/hadolint:2.6.0 as build-hadolint
 
 FROM hadenlabs/build-tools:0.1.0 as base
@@ -47,10 +49,6 @@ ENV MODULES_PYTHON \
 ENV MODULES_NODE \
     markdown-link-check
 
-
-ENV MODULES_GO \
-    github.com/golangci/golangci-lint/cmd/golangci-lint
-
 ENV PATH $PATH:/go/bin:/usr/local/go/bin:/root/.local/bin:/usr/bin:/usr/local/bin
 
 RUN apt-get update -y \
@@ -68,8 +66,6 @@ RUN apt-get update -y \
     && python -m pip install --user --no-cache-dir $MODULES_PYTHON \
     # Install modules node
     && yarn global add $MODULES_NODE \
-    # Install modules go
-    && go get -u -v $MODULES_GO \
     && sed -i "s/root:\/root:\/bin\/ash/root:\/root:\/bin\/bash/g" /etc/passwd \
     && apt-get clean \
     && apt-get purge -y \
@@ -81,6 +77,9 @@ COPY --from=go-builder /usr/local/go/bin/* /usr/local/go/bin/
 
 # hadolint
 COPY --from=build-hadolint /bin/hadolint /usr/local/bin/
+
+# golangci-lint
+COPY --from=build-golangcilint /usr/bin/golangci-lint /usr/bin/
 
 # Reset the work dir
 WORKDIR /data
