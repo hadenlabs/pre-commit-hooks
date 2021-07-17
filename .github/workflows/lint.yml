@@ -27,7 +27,6 @@ jobs:
           git submodule init
           git submodule update
       - name: generate image docker
-        if: ${{ !env.ACT }}
         run: |
           docker build --no-cache ./ --tag ${{ env.IMAGE_NAME }}:latest
       - name: validate files
