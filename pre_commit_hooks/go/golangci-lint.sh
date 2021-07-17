@@ -151,7 +151,7 @@ parse_cmdline_() {
 }
 
 golangcilint_() {
-  eval exec golangci-lint run "${ARGS[@]}"
+  eval exec golangci-lint run --allow-parallel-runners "${ARGS[@]}"
 }
 
 # global arrays
