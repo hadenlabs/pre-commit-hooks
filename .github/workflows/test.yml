@@ -7,10 +7,12 @@ on:
   push:
     branches:
       - develop
+      - main
 
   pull_request:
     branches:
       - develop
+      - main
 
 env:
   IMAGE_NAME: 'hadenlabs/pre-commit-hooks'
@@ -27,9 +29,19 @@ jobs:
     steps:
       - name: check out a copy of the repo
         uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
       - name: build the docker image
-        run: |
-          docker build . --tag ${{ env.IMAGE_NAME }}:latest
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: false
+          tags: ${{ env.IMAGE_NAME }}:latest
+
       - name: install Go
         uses: actions/setup-go@v2
         with:
