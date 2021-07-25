@@ -51,4 +51,5 @@ python.precommit:
 	$(PIPENV_RUN) pre-commit install
 	$(PIPENV_RUN) pre-commit install -t pre-push
 	$(PIPENV_RUN) pre-commit install --hook-type commit-msg
+	$(PIPENV_RUN) pre-commit install --hook-type prepare-commit-msg
 	@echo ${MESSAGE_HAPPY}
