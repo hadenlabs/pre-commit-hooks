@@ -241,6 +241,17 @@ repos:
           - --verbose
 ```
 
+### prepare-commit-msg:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.3.0
+    hooks:
+      - id: prepare-commit-msg
+        stages: [prepare-commit-msg]
+```
+
 
 
 
