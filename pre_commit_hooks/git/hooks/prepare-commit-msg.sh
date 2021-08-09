@@ -6,9 +6,9 @@
 
 function sed::inplace {
   if [[ ${OSTYPE} =~ ^darwin ]]; then
-    sed -i '' "${@}"
+    /usr/bin/sed -i '' "${@}"
   else
-    sed -i "${@}"
+    /usr/bin/sed -i "${@}"
   fi
 }
 
@@ -21,8 +21,8 @@ REGEX_VALIDATION="^[0-9]+$"
 BRANCH_NAME=$(git symbolic-ref --short HEAD)
 BRANCH_NAME="${BRANCH_NAME##*/}"
 
-BRANCH_IN_COMMIT=$(grep -c "\\[$BRANCH_NAME\\]" "${1}")
-BRANCH_EXCLUDED=$(printf "%s\\n" "${BRANCHES_TO_SKIP[@]}" | grep -c "^$BRANCH_NAME$")
+BRANCH_IN_COMMIT=$(/usr/bin/grep -c "\\[$BRANCH_NAME\\]" "${1}")
+BRANCH_EXCLUDED=$(printf "%s\\n" "${BRANCHES_TO_SKIP[@]}" | /usr/bin/grep -c "^$BRANCH_NAME$")
 
 if [[ -n "${BRANCH_NAME}" ]] && [[ "${BRANCH_NAME}" =~ ${REGEX_VALIDATION} ]] ; then
     BRANCH_NAME="#${BRANCH_NAME}"
