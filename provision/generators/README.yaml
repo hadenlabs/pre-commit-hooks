@@ -27,12 +27,12 @@ badges:
   - name: Lint
     image: https://img.shields.io/github/workflow/status/hadenlabs/pre-commit-hooks/lint-code
     url: https://github.com/hadenlabs/pre-commit-hooks/actions?workflow=lint-code
-  - name: CI
-    image: https://img.shields.io/github/workflow/status/hadenlabs/pre-commit-hooks/ci
-    url: https://github.com/hadenlabs/pre-commit-hooks/actions?workflow=ci
   - name: Test
     image: https://img.shields.io/github/workflow/status/hadenlabs/pre-commit-hooks/test
     url: https://github.com/hadenlabs/pre-commit-hooks/actions?workflow=test
+  - name: CD
+    image: https://img.shields.io/github/workflow/status/hadenlabs/pre-commit-hooks/cd
+    url: https://github.com/hadenlabs/pre-commit-hooks/actions?workflow=cd
   - name: pre-commit
     image: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
     url: https://github.com/pre-commit/pre-commit
