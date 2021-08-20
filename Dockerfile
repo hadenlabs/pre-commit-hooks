@@ -53,31 +53,36 @@ RUN apt-get update -y \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 FROM go-base AS gotests
+
 RUN GO111MODULE=on go get -u  \
-    --ldflags "-s -w" --trimpath \
+    --ldflags -s -w --trimpath \
     github.com/cweill/gotests/gotests \
-    && upx -9 ${GOPATH}/bin/gotests
+    && upx -9 "${GOPATH}"/bin/gotests
 
 FROM go-base AS gitleaks
+
 RUN GO111MODULE=on go get -u  \
     --ldflags "-s -w" --trimpath \
     github.com/zricethezav/gitleaks/v7 \
-    && upx -9 ${GOPATH}/bin/gitleaks
+    && upx -9 "${GOPATH}"/bin/gitleaks
 
 FROM go-base AS goimports
+
 RUN GO111MODULE=on go get -u  \
-    --ldflags "-s -w" --trimpath \
+    --ldflags -s -w --trimpath \
     golang.org/x/tools/cmd/goimports \
-    && upx -9 ${GOPATH}/bin/goimports
+    && upx -9 "${GOPATH}"/bin/goimports
 
 FROM go-base AS goimports-update-ignore
+
 RUN GO111MODULE=on go get -u  \
-    --ldflags "-s -w" --trimpath \
+    --ldflags -s -w --trimpath \
     github.com/pwaller/goimports-update-ignore \
-    && upx -9 ${GOPATH}/bin/goimports-update-ignore
+    && upx -9 "${GOPATH}"/bin/goimports-update-ignore
 
 FROM go-base AS go
-RUN upx -9 ${GOROOT}/bin/*
+
+RUN upx -9 "${GOROOT}"/bin/*
 
 FROM base as go-bins
 
@@ -110,23 +115,24 @@ ENV MODULES_NODE \
 ENV PATH $PATH:/go/bin:/usr/local/go/bin:/root/.local/bin:/usr/bin:/usr/local/bin
 
 ENV GOPATH /go
+
 ENV GOROOT /usr/local/go
 
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
-    $BUILD_DEPS \
+    "$BUILD_DEPS" \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update -y \
     && apt-get install -y --no-install-recommends \
-    $BASE_DEPS \
-    $PERSIST_DEPS \
+    "${BASE_DEPS}" \
+    "${PERSIST_DEPS}" \
     && ln -sf /usr/bin/python3 /usr/bin/python \
     && ln -sf /usr/bin/pip3 /usr/bin/pip \
     # Install modules python
-    && python -m pip install --user --no-cache-dir $MODULES_PYTHON \
+    && python -m pip install --user --no-cache-dir "${MODULES_PYTHON}" \
     # Install modules node
-    && yarn global add $MODULES_NODE \
+    && yarn global add "${MODULES_NODE}" \
     && sed -i "s/root:\/root:\/bin\/ash/root:\/root:\/bin\/bash/g" /etc/passwd \
     && apt-get clean \
     && apt-get purge -y \
