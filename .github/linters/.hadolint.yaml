@@ -5,6 +5,8 @@ ignored:
   - DL3018 # Pin versions in apk add. Instead of `apk add <package>` use `apk add <package>=<version>
   - DL3028 # Pin versions in gem install. Instead of `gem install <gem>` use `gem install <gem>:<version>`
 
+  - SC2086 # info: Double quote to prevent globbing and word splitting.
+
   # temp
 
   - DL4006 # Set the SHELL option -o pipefail before RUN with a pipe in it
