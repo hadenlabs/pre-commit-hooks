@@ -43,8 +43,13 @@ parse_cmdline_() {
     case $argv in
       -c | --config)
         shift
-        ARGS+=("--config ${1}")
+        ARGS+=("--config=${1}")
         shift
+        ;;
+      --)
+      shift
+        FILES=("$@")
+        break
         ;;
     esac
   done
@@ -52,10 +57,13 @@ parse_cmdline_() {
 }
 
 hadolint_() {
-  hadolint "${ARGS[@]}"
+  for file in "${FILES[@]}"; do
+    hadolint "${ARGS[@]}" "${file}"
+  done
 }
 
 # global arrays
 declare -a ARGS
+declare -a FILES
 
 [[ ${BASH_SOURCE[0]} != "$0" ]] || main "$@"
