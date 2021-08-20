@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file. This file uses change log convention from [keep a CHANGELOG](http://keepachangelog.com/en/0.3.0/).
 
 
+<a name="0.4.0"></a>
+## [0.4.0](https://github.com/hadenlabs/pre-commit-hooks/compare/0.3.0...0.4.0)
+
+> 2021-08-20
+
+### Bug Fixes
+
+* generate build docker file ignored quotes for docker file ([#65](https://github.com/hadenlabs/pre-commit-hooks/issues/65))
+* validation hadolint rules ([#65](https://github.com/hadenlabs/pre-commit-hooks/issues/65))
+* load hadolint configuration ([#67](https://github.com/hadenlabs/pre-commit-hooks/issues/67))
+* badge ci for readme ([#65](https://github.com/hadenlabs/pre-commit-hooks/issues/65))
+* change system to script ([#62](https://github.com/hadenlabs/pre-commit-hooks/issues/62))
+* generator message prepare-commit ([#58](https://github.com/hadenlabs/pre-commit-hooks/issues/58))
+* matrix test ubuntu so name ([#57](https://github.com/hadenlabs/pre-commit-hooks/issues/57))
+* execution parallel golangci ([#57](https://github.com/hadenlabs/pre-commit-hooks/issues/57))
+* testing code (0.3.0)
+* generate image dependences go ([#57](https://github.com/hadenlabs/pre-commit-hooks/issues/57))
+* version golangci-lint for docker ([#57](https://github.com/hadenlabs/pre-commit-hooks/issues/57))
+* variable prepare commit message hook git (0.3.0)
+* parameter tty docker run validate (0.3.0)
+* version version go (0.3.0)
+* validate code pre-commit (0.3.0)
+
+### Code Refactoring
+
+* github actions validation code ([#65](https://github.com/hadenlabs/pre-commit-hooks/issues/65))
+* change sh prepare commit ([#62](https://github.com/hadenlabs/pre-commit-hooks/issues/62))
+* configuration github actions ([#60](https://github.com/hadenlabs/pre-commit-hooks/issues/60))
+* implement hooks prepare-commit-msg ([#58](https://github.com/hadenlabs/pre-commit-hooks/issues/58))
+
+### Features
+
+* implement configuration authors ([#65](https://github.com/hadenlabs/pre-commit-hooks/issues/65))
+* implement lint pattern compare markdown ([#65](https://github.com/hadenlabs/pre-commit-hooks/issues/65))
+* implement configuration hadolint ([#67](https://github.com/hadenlabs/pre-commit-hooks/issues/67))
+* implement package path full ([#62](https://github.com/hadenlabs/pre-commit-hooks/issues/62))
+* clean actions git hooks for make action ([#58](https://github.com/hadenlabs/pre-commit-hooks/issues/58))
+* implement golangci lint for docker ([#57](https://github.com/hadenlabs/pre-commit-hooks/issues/57))
+* implement module install go ([#57](https://github.com/hadenlabs/pre-commit-hooks/issues/57))
+* implement git submodule sync (0.3.0)
+
+### Features
+
+* change version python ([#65](https://github.com/hadenlabs/pre-commit-hooks/issues/65))
+* clean lint deprecated ([#60](https://github.com/hadenlabs/pre-commit-hooks/issues/60))
+* change test only ubuntu linux (0.3.0)
+* implement default stages commit ([#57](https://github.com/hadenlabs/pre-commit-hooks/issues/57))
+
+
 <a name="0.3.0"></a>
 ## [0.3.0](https://github.com/hadenlabs/pre-commit-hooks/compare/0.2.0...0.3.0)
 
