@@ -145,6 +145,10 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+### Node Patch ###
+# Serverless Webpack directories
+.webpack/
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
