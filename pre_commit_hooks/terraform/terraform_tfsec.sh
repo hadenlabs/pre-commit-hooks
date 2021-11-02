@@ -33,7 +33,7 @@ initialize_() {
 
 parse_cmdline_() {
   declare argv
-  argv=$(getopt -o e:f --long custom-check-dir:,exclude:,format:,no-color:,no-colour:,tfvars-file: -- "$@") || return
+  argv=$(getopt -o e:f --long custom-check-dir:,exclude:,exclude-downloaded-modules:,format:,no-color:,no-colour:,tfvars-file: -- "$@") || return
 
   eval "set -- ${argv}"
 
@@ -42,6 +42,11 @@ parse_cmdline_() {
       --custom-check-dir)
         shift
         ARGS+=("--custom-check-dir ${1}")
+        shift
+        ;;
+      --exclude-downloaded-modules)
+        shift
+        ARGS+=("--exclude-downloaded-modules ${1}")
         shift
         ;;
       -e | --exclude)
@@ -91,7 +96,7 @@ tfsec_() {
 
   for path_uniq in $(echo "${paths[*]}" | tr ' ' '\n' | sort -u); do
     path_uniq="${path_uniq//__REPLACED__SPACE__/ }"
-    tfsec "${path_uniq}" "${ARGS[@]}"
+    eval exec tfsec "${path_uniq}" "${ARGS[@]}"
   done
 }
 
