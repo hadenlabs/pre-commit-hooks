@@ -10,6 +10,10 @@ name: pre-commit-hooks
 email:
   support: support@hadenlabs.com
 
+confluence:
+  space: PreCommitHooks
+  title: Project
+
 # Logo for this project
 #logo: docs/logo.png
 
@@ -33,6 +37,9 @@ badges:
   - name: CD
     image: https://img.shields.io/github/workflow/status/hadenlabs/pre-commit-hooks/cd
     url: https://github.com/hadenlabs/pre-commit-hooks/actions?workflow=cd
+  - name: Best Practices
+    image: https://bestpractices.coreinfrastructure.org/projects/5156/badge
+    url: https://bestpractices.coreinfrastructure.org/projects/5156
   - name: pre-commit
     image: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
     url: https://github.com/pre-commit/pre-commit
@@ -40,7 +47,7 @@ badges:
     image: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow
     url: https://conventionalcommits.org
   - name: KeepAChangelog
-    image: https://img.shields.io/badge/Keep%20A%20Changelog-1.0.0-%23E05735
+    image: https://img.shields.io/badge/changelog-Keep%20a%20Changelog%20v1.0.0-orange
     url: https://keepachangelog.com
 
 # Short description of this project
@@ -89,3 +96,6 @@ usage: |-
 
 examples:
   - 'docs/examples/common.md'
+
+usages:
+  - docs/usage.md
