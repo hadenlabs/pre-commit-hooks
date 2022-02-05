@@ -28,8 +28,8 @@ jobs:
       - id: get_version
         uses: battila7/get-version-action@v2
 
-      -  name: set vars to github
-         run: |
+      - name: set vars to github
+        run: |
           echo "APP_TAG=${{ steps.get_version.outputs.version-without-v }}" >> $GITHUB_ENV
 
       - name: set up qemu
