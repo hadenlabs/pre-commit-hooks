@@ -34,8 +34,7 @@ initialize_() {
 
 parse_cmdline_() {
     declare argv
-
-    argv=$(getopt -o v:q:r:p:c:o:f --long verbose,quiet:,repo-url:,path:,config-path:,repo-config-path:,clone-path:,version:,username:,password:,access-token:,threads:,ssh-key:,unstaged:,branch:,redact:,debug:,no-git:,additional-config:,report:,format:,files-at-commit:,commit:,commits:,commits-file:,commit-from:,commit-to:,commit-since:,commit-until:,depth: -- "$@") || return
+    argv=$(getopt -o v:q:r:p:c:o:f --long verbose,unstaged,quiet:,repo-url:,path:,config-path:,repo-config-path:,clone-path:,version:,username:,password:,access-token:,threads:,ssh-key:,branch:,redact:,debug:,no-git:,additional-config:,report:,format:,files-at-commit:,commit:,commits:,commits-file:,commit-from:,commit-to:,commit-since:,commit-until:,depth: -- "$@") || return
 
     eval "set -- ${argv}"
 
@@ -49,6 +48,11 @@ parse_cmdline_() {
             -q | --quiet)
                 shift
                 ARGS+=("--quiet=${1}")
+                shift
+                ;;
+            --unstaged)
+                shift
+                ARGS+=("--unstaged")
                 shift
                 ;;
             -r | --repo-url)
@@ -104,11 +108,6 @@ parse_cmdline_() {
             --ssh-key)
                 shift
                 ARGS+=("--ssh-key=${1}")
-                shift
-                ;;
-            --unstaged)
-                shift
-                ARGS+=("--unstaged=${1}")
                 shift
                 ;;
             --branch)
