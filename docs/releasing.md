@@ -12,7 +12,7 @@
 
 ## Bump a new version
 
-Make a new version of base-template in the following steps:
+Make a new version of pre-commit-hooks in the following steps:
 
 ### Generate version major
 
