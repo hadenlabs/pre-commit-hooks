@@ -55,6 +55,11 @@ parse_cmdline_() {
                 ARGS+=("--unstaged")
                 shift
                 ;;
+            --redact)
+                shift
+                ARGS+=("--redact")
+                shift
+                ;;
             -r | --repo-url)
                 shift
                 ARGS+=("--repo-url=${1}")
@@ -113,11 +118,6 @@ parse_cmdline_() {
             --branch)
                 shift
                 ARGS+=("--branch=${1}")
-                shift
-                ;;
-            --redact)
-                shift
-                ARGS+=("--redact=${1}")
                 shift
                 ;;
             --debug)
@@ -197,7 +197,7 @@ parse_cmdline_() {
 
 
 gitleaks_() {
-  exec gitleaks "${ARGS[@]}" --branch="$(git symbolic-ref --short HEAD)"
+  exec gitleaks protected "${ARGS[@]}" --branch="$(git symbolic-ref --short HEAD)"
 }
 
 # global arrays
