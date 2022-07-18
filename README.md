@@ -1,6 +1,3 @@
- <!-- Space: PreCommitHooks -->
-<!-- Title: Project -->
-
 <!--
 
 
@@ -24,7 +21,6 @@ This repository is a collection of Git hooks to be used with the [pre-commit](ht
 ## Features
 
 - [Terraform](https://github.com/terraform-linters/tflint)
-- [TodoCheck](https://github.com/preslavmihaylov/todocheck)
 - [Go](https://golang.org)
 - [Markdown](https://github.com/tcort/markdown-link-check)
 - [Shellcheck](https://github.com/koalaman/shellcheck)
@@ -56,6 +52,8 @@ This repository is a collection of Git hooks to be used with the [pre-commit](ht
 ### Linux
 
 ## Usage
+
+# How to use this project
 
 ## Examples
 
@@ -175,7 +173,7 @@ repos:
     hooks:
       - id: hadolint
         args:
-          - --config=.github/linters/.hadolint.yaml
+          - --config=.ci/linters/.hadolint.yaml
 ```
 
 ### docker-compose:
@@ -198,7 +196,7 @@ repos:
       - id: gitleaks
         args:
           - --path=.
-          - --repo-config-path=.github/linters/.gitleaks.toml
+          - --repo-config-path=.ci/linters/.gitleaks.toml
           - --verbose
 ```
 
