@@ -1,5 +1,11 @@
 default_stages:
   - commit
+exclude: >
+  (?x)^(
+    ^(\/|)vendor\/(.*?)$|
+    .+\.node_modules\/.*$|
+    .+\.lock$|
+  )$
 
 repos:
   - repo: https://github.com/codespell-project/codespell
@@ -7,22 +13,16 @@ repos:
     hooks:
       - id: codespell
         args: [--ignore-words=.codespell-ignores]
-        exclude: >
-          (?x)^(
-            .+\.vendor\/.*$|
-            .+\.node_modules\/.*$|
-            .+\.lock$|
-          )$
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v5.0.0
+    rev: v8.0.0
     hooks:
       - id: commitlint
         stages: [commit-msg]
         additional_dependencies: ['@hadenlabs/commitlint-config']
         args:
-          - --config=.github/linters/.commitlintrc.json
+          - --config=.ci/linters/.commitlintrc.json
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v4.3.0
     hooks:
       - id: detect-private-key
         files: ^(?!\.?git-crypt)
@@ -37,6 +37,8 @@ repos:
       - id: check-json
       - id: check-xml
       - id: check-yaml
+        args:
+          - --allow-multiple-documents
       - id: check-byte-order-marker
       - id: check-ast
       - id: debug-statements
@@ -55,7 +57,7 @@ repos:
         language: script
         files: \.md$
         args:
-          - --config=.github/linters/markdown-link-config.json
+          - --config=.ci/linters/markdown-link-config.json
         exclude: >
           (?x)^(
             .+\.tpl.md$|
@@ -309,17 +311,6 @@ repos:
           )$
         description: 'Runs `go mod vendor`, requires golang'
 
-      # todocheck specific hooks
-
-      - id: todocheck
-        name: todo check
-        description: Tests files with todocheck.
-        entry: pre_commit_hooks/check/todocheck.sh
-        language: 'script'
-        always_run: true
-        pass_filenames: false
-        minimum_pre_commit_version: 0.15.0
-
       # docker
       - id: hadolint
         name: hadolint
@@ -329,7 +320,7 @@ repos:
         types: [file]
         files: Dockerfile(.*)
         args:
-          - --config=.github/linters/.hadolint.yaml
+          - --config=.ci/linters/.hadolint.yaml
 
       # git
       - id: gitleaks
@@ -340,7 +331,7 @@ repos:
         require_serial: true
         args:
           - --path=.
-          - --repo-config-path=.github/linters/.gitleaks.toml
+          - --repo-config-path=.ci/linters/.gitleaks.toml
           - --verbose
         language: script
         minimum_pre_commit_version: 0.15.0
