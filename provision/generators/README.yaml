@@ -10,10 +10,6 @@ name: pre-commit-hooks
 email:
   support: support@hadenlabs.com
 
-confluence:
-  space: PreCommitHooks
-  title: Project
-
 # Logo for this project
 #logo: docs/logo.png
 
@@ -57,7 +53,6 @@ description: |-
 
 features:
   - '[Terraform](https://github.com/terraform-linters/tflint)'
-  - '[TodoCheck](https://github.com/preslavmihaylov/todocheck)'
   - '[Go](https://golang.org)'
   - '[Markdown](https://github.com/tcort/markdown-link-check)'
   - '[Shellcheck](https://github.com/koalaman/shellcheck)'
@@ -94,8 +89,8 @@ usage: |-
   Once you created the configuration file inside your repository, you must run `pre-commit install` to activate the hooks.
   That's it, pre-commit will now listen for changes in your files and run the checks accordingly.
 
-examples:
-  - 'docs/examples/common.md'
-
 usages:
   - docs/usage.md
+
+examples:
+  - 'docs/examples/common.md'
