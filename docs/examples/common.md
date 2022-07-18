@@ -114,7 +114,7 @@ repos:
     hooks:
       - id: hadolint
         args:
-          - --config=.github/linters/.hadolint.yaml
+          - --config=.ci/linters/.hadolint.yaml
 ```
 
 ### docker-compose:
@@ -137,7 +137,7 @@ repos:
       - id: gitleaks
         args:
           - --path=.
-          - --repo-config-path=.github/linters/.gitleaks.toml
+          - --repo-config-path=.ci/linters/.gitleaks.toml
           - --verbose
 ```
 

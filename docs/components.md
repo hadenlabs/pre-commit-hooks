@@ -1,11 +1,11 @@
-<!-- Space: PreCommitHooks -->
-<!-- Parent: Project -->
-<!-- Title: Project Components -->
+<!-- Space: Projects -->
+<!-- Parent: PreCommitHooks -->
+<!-- Title: Components PreCommitHooks -->
 
 <!-- Label: PreCommitHooks -->
 <!-- Label: Project -->
 <!-- Label: Components -->
-<!-- Include: docs/disclaimer.md -->
+<!-- Include: disclaimer.md -->
 <!-- Include: ac:toc -->
 
 # components
