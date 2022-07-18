@@ -9,7 +9,6 @@ includes:
   docker: ./provision/task/docker.yml
   gitflow: ./provision/task/gitflow.yml
   version: ./provision/task/version.yml
-  mark: ./provision/task/mark.yml
   plantuml: ./provision/task/plantuml.yml
   prettier: ./provision/task/prettier.yml
   sonar: ./provision/task/sonar.yml
@@ -75,7 +74,6 @@ tasks:
       - python:check
       - changelog:check
       - git:check
-      - gitflow:check
       - docs:check
 
   readme:
@@ -88,6 +86,7 @@ tasks:
         --out {{.README_FILE}}
         --datasource config={{.README_YAML}}
         --datasource includes={{.README_INCLUDES}}
+      - task: prettier
 
   prettier:
     run: once
@@ -103,7 +102,6 @@ tasks:
       - task: python:setup
       - task: python:precommit
       - task: git:setup
-      - task: gitflow:setup
 
   environment:
     desc: Setup environment of project
