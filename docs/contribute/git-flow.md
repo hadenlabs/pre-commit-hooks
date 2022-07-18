@@ -1,12 +1,12 @@
-<!-- Space: PreCommitHooks -->
-<!-- Parent: Project -->
-<!-- Title: Contributing GitFlow -->
+<!-- Space: Projects -->
+<!-- Parent: PreCommitHooks -->
+<!-- Title: Contributing GitFlow PreCommitHooks -->
 
 <!-- Label: PreCommitHooks -->
 <!-- Label: Project -->
 <!-- Label: Contributing -->
 <!-- Label: GitFlow -->
-<!-- Include: docs/disclaimer.md -->
+<!-- Include: ./../disclaimer.md -->
 <!-- Include: ac:toc -->
 
 To contribute to pre-commit-hooks project on [GitHub](https://github.com/hadenlabs/pre-commit-hooks), We use Gitflow (See more [here](https://datasift.github.io/gitflow/IntroducingGitFlow.html)) In a nutshell, it means that you should branch from the main repository and contribute back by making [pull request](https://github.com/hadenlabs/pre-commit-hooks/pulls).

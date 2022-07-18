@@ -1,11 +1,11 @@
-<!-- Space: PreCommitHooks -->
-<!-- Parent: Project -->
-<!-- Title: Project Releasing -->
+<!-- Space: Projects -->
+<!-- Parent: PreCommitHooks -->
+<!-- Title: Releasing PreCommitHooks -->
 
 <!-- Label: PreCommitHooks -->
 <!-- Label: Project -->
 <!-- Label: Releasing -->
-<!-- Include: docs/disclaimer.md -->
+<!-- Include: disclaimer.md -->
 <!-- Include: ac:toc -->
 
 # Releasing
