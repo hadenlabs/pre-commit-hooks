@@ -225,6 +225,17 @@ repos:
         stages: [prepare-commit-msg]
 ```
 
+### block-files:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.4.0
+    hooks:
+      - id: block-files
+        args: ["--ext", ".key", "--ext", ".crt"]
+```
+
 ## Help
 
 ### Got a question?
