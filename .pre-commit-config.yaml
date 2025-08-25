@@ -330,22 +330,19 @@ repos:
           )$
         description: "Runs `go mod tidy -v`, requires golang"
 
-      - id: go-mod-vendor
-        name: "go-mod-vendor"
-        entry: pre_commit_hooks/go/go-mod-vendor.sh
-        files: '\.go$'
+      - id: block-files
+        name: "Block forbidden extensions"
+        entry: pre_commit_hooks/block-files/block-files.sh
         language: "script"
-        exclude: >
-          (?x)^(
-            .+\.terraform\/.*$|
-          )$
-        description: "Runs `go mod vendor`, requires golang"
+        args: ["--ext", ".key", "--ext", ".crt"]
+        types: [file]
 
       # docker
       - id: hadolint
         name: hadolint
         description: Tests files Dockerfiles with hadolint
         entry: pre_commit_hooks/docker/hadolint.sh
+        require_serial: true
         language: "script"
         types: [file]
         files: Dockerfile(.*)

@@ -314,6 +314,14 @@
   entry: pre_commit_hooks/docker/docker-compose.sh
   files: docker-compose.y[a]{0,1}ml$
 
+  # block-files
+
+- id: block-files
+  name: "Block forbidden extensions"
+  language: "script"
+  entry: pre_commit_hooks/block-files/block-files.sh
+  types: [file]
+
 # leaks
 
 - id: gitleaks
