@@ -365,11 +365,3 @@ repos:
           - --verbose
         language: script
         minimum_pre_commit_version: 0.15.0
-
-      # git
-      - id: prepare-commit-msg
-        name: prepare-commit-msg
-        entry: pre_commit_hooks/git/hooks/prepare-commit-msg.sh
-        language: script
-        stages: [prepare-commit-msg]
-        minimum_pre_commit_version: 0.15.0
