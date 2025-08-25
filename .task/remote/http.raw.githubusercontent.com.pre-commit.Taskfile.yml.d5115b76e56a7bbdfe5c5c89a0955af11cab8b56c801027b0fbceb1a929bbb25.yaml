@@ -1,0 +1,18 @@
+---
+version: "3"
+
+tasks:
+  update-hooks:
+    desc: "Update pre-commit hooks"
+    cmds:
+      - pre-commit autoupdate
+
+  clear-cache:
+    desc: "Clear pre-commit cache"
+    cmds:
+      - pre-commit clean
+
+  run-hooks:
+    desc: "Run all pre-commit hooks locally"
+    cmds:
+      - pre-commit run --all-files --show-diff-on-failure

@@ -1,0 +1,104 @@
+---
+version: "3"
+
+tasks:
+  default:
+    desc: List all available tasks
+    cmds:
+      - task -t src/uv/Taskfile.yml --list
+
+  check:
+    desc: Exist python and dependences
+    run: once
+    deps:
+      - task: check:python
+      - task: check:uv
+      - task: check:precommit
+      - task: check:ruff
+
+  check:python:
+    desc: Exist Python
+    run: once
+    preconditions:
+      - sh: command -v python
+        msg: "Please Install python"
+
+  check:uv:
+    desc: Exist uv
+    run: once
+    preconditions:
+      - sh: command -v uv
+        msg: "Please Install uv"
+
+  check:precommit:
+    desc: Exist pre-commit
+    run: once
+    preconditions:
+      - sh: test "uv run command -v pre-commit"
+        msg: "Please Install pre-commit"
+
+  check:ruff:
+    desc: Exist ruff
+    run: once
+    preconditions:
+      - sh: test "uv run command -v ruff"
+        msg: "Please Install ruff"
+
+  setup:
+    desc: Setup python dependences.
+    run: once
+    cmds:
+      - uv sync --all-groups
+    deps:
+      - task: check:python
+      - task: check:uv
+
+  fmt:
+    desc: format ruff
+    run: once
+    cmds:
+      - cmd: >-
+          uv run ruff format ./ {{.CLI_ARGS}}
+
+  lint:
+    desc: Lint with ruff
+    cmds:
+      - uv run ruff check ./ {{.CLI_ARGS}}
+      - task: mypy
+
+  test:
+    desc: run pytest.
+    run: once
+    cmds:
+      - task: pytest
+
+  pytest:
+    desc: Run tests with pytest and coverage
+    cmds:
+      - uv run coverage run -m pytest -s -vv
+      - uv run coverage report
+      - uv run coverage html
+
+  mypy:
+    desc: Run mypy types checking
+    cmds:
+      - uv run mypy src
+
+  environment:
+    desc: Generate environment python.
+    run: once
+    cmds:
+      - uv python install
+    deps:
+      - task: check:uv
+
+  precommit:
+    desc: Install pre-commit.
+    run: once
+    cmds:
+      - uv run pre-commit install
+      - uv run pre-commit install -t pre-push
+      - uv run pre-commit install -t commit-msg
+      - uv run pre-commit install -t prepare-commit-msg
+    deps:
+      - task: check

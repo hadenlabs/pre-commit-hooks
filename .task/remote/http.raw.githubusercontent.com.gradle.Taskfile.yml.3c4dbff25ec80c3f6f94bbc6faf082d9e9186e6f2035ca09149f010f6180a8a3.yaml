@@ -1,0 +1,70 @@
+version: "3"
+
+tasks:
+  check:
+    desc: Exist gradle and dependences
+    run: once
+    deps:
+      - task: check:gradle
+
+  check:gradle:
+    desc: Exist gradle
+    run: once
+    preconditions:
+      - sh: command -v gradle
+        msg: "Please Install gradle"
+
+  setup:
+    desc: Setup gradle dependences.
+    run: once
+    cmds:
+      - gradle clean install
+    deps:
+      - task: check:gradle
+
+  dependencies:
+    desc: Setup gradle dependencies.
+    run: once
+    cmds:
+      - gradle dependencies
+    deps:
+      - task: check:gradle
+
+  clean:
+    desc: Clean gradle packages.
+    run: once
+    cmds:
+      - gradle clean
+    deps:
+      - task: check:gradle
+
+  build:
+    desc: Build gradle packages.
+    run: once
+    cmds:
+      - gradle clean build
+    deps:
+      - task: check:gradle
+
+  test:
+    desc: Test gradle packages.
+    cmds:
+      - gradle test
+    deps:
+      - task: check:gradle
+
+  run:
+    desc: Run gradle.
+    run: once
+    cmds:
+      - gradle bootRun
+    deps:
+      - task: check:gradle
+
+  publish:
+    desc: Publish gradle packages.
+    run: once
+    cmds:
+      - gradle publish
+    deps:
+      - task: check:gradle

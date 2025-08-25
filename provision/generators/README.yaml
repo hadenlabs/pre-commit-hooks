@@ -87,5 +87,8 @@ usage: |-
   Once you created the configuration file inside your repository, you must run `pre-commit install` to activate the hooks.
   That's it, pre-commit will now listen for changes in your files and run the checks accordingly.
 
+usages:
+  - docs/usage.md
+
 examples:
   - 'docs/examples/common.md'

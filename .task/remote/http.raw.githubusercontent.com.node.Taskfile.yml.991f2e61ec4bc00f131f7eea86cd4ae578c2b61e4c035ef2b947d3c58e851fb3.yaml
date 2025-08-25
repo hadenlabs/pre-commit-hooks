@@ -1,0 +1,32 @@
+---
+version: "3"
+
+tasks:
+  check:
+    desc: Exist node and dependences
+    run: once
+    deps:
+      - task: check:node
+      - task: check:fnm
+
+  check:node:
+    desc: Exist node
+    run: once
+    preconditions:
+      - sh: command -v node
+        msg: "Please Install node"
+
+  check:fnm:
+    desc: Exist fnm
+    run: once
+    preconditions:
+      - sh: command -v fnm
+        msg: "Please Install fnm"
+
+  environment:
+    desc: Generate environment node.
+    run: once
+    cmds:
+      - fnm install {{ .NODE_VERSION }} && fnm use {{ .NODE_VERSION }}
+    deps:
+      - task: check:fnm

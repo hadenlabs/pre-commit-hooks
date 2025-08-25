@@ -1,0 +1,47 @@
+version: "3"
+
+tasks:
+  check:
+    desc: Exist pnpm and dependences
+    run: once
+    deps:
+      - task: check:pnpm
+      - task: check:fnm
+
+  check:pnpm:
+    desc: Exist pnpm
+    run: once
+    preconditions:
+      - sh: command -v pnpm
+        msg: "Please Install pnpm"
+
+  check:fnm:
+    desc: Exist fnm
+    run: once
+    preconditions:
+      - sh: test "command -v fnm"
+        msg: "Please Install fnm"
+
+  setup:
+    desc: Setup pnpm dependences.
+    run: once
+    cmds:
+      - pnpm install
+    deps:
+      - task: check:pnpm
+
+  update:
+    desc: Update pnpm.
+    run: once
+    cmds:
+      - pnpm run ncu:patch
+    deps:
+      - task: check:pnpm
+
+  environment:
+    desc: Setup environment fnm version node.
+    run: once
+    cmds:
+      - fnm use {{.NODE_VERSION}}
+    deps:
+      - task: check

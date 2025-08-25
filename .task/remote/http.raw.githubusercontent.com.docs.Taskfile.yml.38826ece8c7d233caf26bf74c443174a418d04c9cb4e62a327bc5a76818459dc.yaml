@@ -1,0 +1,63 @@
+version: "3"
+
+tasks:
+  check:
+    desc: Exist mkdocs and grip dependences
+    run: once
+    deps:
+      - task: check:python
+      - task: check:python_package_manager
+      - task: check:mkdocs
+      - task: check:grip
+
+  check:python:
+    desc: Exist Python
+    run: once
+    preconditions:
+      - sh: command -v python
+        msg: "Please Install python"
+
+  check:python_package_manager:
+    desc: Exist {{ .PYTHON_PACKAGE_MANAGER }}
+    run: once
+    preconditions:
+      - sh: command -v {{ .PYTHON_PACKAGE_MANAGER }}
+        msg: "Please Install {{ .PYTHON_PACKAGE_MANAGER }}"
+
+  check:mkdocs:
+    desc: Exist mkdocs
+    run: once
+    preconditions:
+      - sh: test "{{ .PYTHON_PACKAGE_MANAGER }} run command -v mkdocs"
+        msg: "Please Install mkdocs"
+
+  check:grip:
+    desc: Exist grip
+    run: once
+    preconditions:
+      - sh: test "{{ .PYTHON_PACKAGE_MANAGER }} run command -v grip"
+        msg: "Please Install grip"
+
+  show:
+    desc: Show grip readme.
+    run: once
+    cmds:
+      - "{{ .PYTHON_PACKAGE_MANAGER }} run grip"
+    deps:
+      - task: check:grip
+
+  build:
+    desc: Build documentation with mkdocs.
+    run: once
+    cmds:
+      - "{{ .PYTHON_PACKAGE_MANAGER }} run mkdocs build"
+    deps:
+      - task: check:mkdocs
+
+  serve:
+    desc: Server make documentation.
+    run: once
+    cmds:
+      - "{{ .PYTHON_PACKAGE_MANAGER }} run mkdocs serve --dev-addr '127.0.0.1:8001'"
+    deps:
+      - task: check:mkdocs

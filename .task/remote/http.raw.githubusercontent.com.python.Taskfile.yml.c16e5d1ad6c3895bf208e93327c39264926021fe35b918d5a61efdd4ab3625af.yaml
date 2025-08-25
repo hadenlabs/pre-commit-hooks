@@ -1,0 +1,77 @@
+---
+version: "3"
+
+vars:
+  PYTHON_PACKAGE_MANAGER: uv
+
+tasks:
+  check:
+    desc: Exist python and dependences
+    run: once
+    deps:
+      - task: check:python
+      - task: check:package_manager
+      - task: check:precommit
+
+  check:python:
+    desc: Exist Python
+    run: once
+    preconditions:
+      - sh: command -v python
+        msg: "Please Install python"
+
+  check:package_manager:
+    desc: Exist Package Manager
+    run: once
+    preconditions:
+      - sh: command -v {{ .PYTHON_PACKAGE_MANAGER }}
+        msg: "Please Install {{ .PYTHON_PACKAGE_MANAGER }}"
+
+  check:precommit:
+    desc: Exist pre-commit
+    run: once
+    preconditions:
+      - sh: test "{{ .PYTHON_PACKAGE_MANAGER }} run command -v pre-commit"
+        msg: "Please Install pre-commit"
+
+  setup:
+    desc: Setup python dependences.
+    run: once
+    cmds:
+      - "{{ .PYTHON_PACKAGE_MANAGER }} install --with dev"
+    deps:
+      - task: check:python
+      - task: check:package_manager
+
+  fmt:
+    desc: format black python.
+    run: once
+    cmds:
+      - cmd: >-
+          {{ .PYTHON_PACKAGE_MANAGER }} run black ./ {{.CLI_ARGS}}
+
+  test:
+    desc: run pytest.
+    run: once
+    cmds:
+      - cmd: "{{ .PYTHON_PACKAGE_MANAGER }} run pytest -s"
+
+  environment:
+    desc: Generate environment python.
+    run: once
+    cmds:
+      - "{{ .PYTHON_PACKAGE_MANAGER }} python install"
+    deps:
+      - task: check:python
+      - task: check:package_manager
+
+  precommit:
+    desc: Install pre-commit.
+    run: once
+    cmds:
+      - "{{ .PYTHON_PACKAGE_MANAGER }} run pre-commit install"
+      - "{{ .PYTHON_PACKAGE_MANAGER }} run pre-commit install -t pre-push"
+      - "{{ .PYTHON_PACKAGE_MANAGER }} run pre-commit install -t commit-msg"
+      - "{{ .PYTHON_PACKAGE_MANAGER }} run pre-commit install -t prepare-commit-msg"
+    deps:
+      - task: check

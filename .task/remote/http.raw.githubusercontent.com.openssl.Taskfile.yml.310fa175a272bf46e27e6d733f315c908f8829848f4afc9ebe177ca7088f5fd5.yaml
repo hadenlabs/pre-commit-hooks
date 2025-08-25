@@ -1,0 +1,52 @@
+version: "3"
+
+tasks:
+  check:
+    desc: Exist openssl and dependences
+    run: once
+    deps:
+      - task: check:openssl
+
+  check:openssl:
+    desc: Exist openssl
+    run: once
+    preconditions:
+      - sh: command -v openssl
+        msg: "Please Install Openssl"
+
+  make:pem:dev:
+    desc: Make pem for stage dev
+    run: once
+    cmds:
+      - task: make
+        vars:
+          STAGE: dev
+
+  make:pem:testing:
+    desc: Make pem for stage testing
+    run: once
+    cmds:
+      - task: make
+        vars:
+          STAGE: testing
+
+  make:
+    desc: generate ssh pem
+    run: once
+    deps:
+      - task: check
+    cmds:
+      - >-
+        ssh-keygen -q -m PEM -t rsa -b 4096
+        -C "admin@{{.PROJECT_NAME}}.com" -f {{.PROJECT_NAME}} -P ""
+      - >-
+        openssl rsa -in {{.PROJECT_NAME}} -outform pem > {{.PROJECT_NAME}}.pem
+      - >-
+        chmod 0600 {{.PROJECT_NAME}}.pem
+      - mv {{.PROJECT_NAME}} {{.KEYBASE_PROJECT_PATH}}/{{.STAGE}}/keys/
+      - mv {{.PROJECT_NAME}}.pem {{.KEYBASE_PROJECT_PATH}}/{{.STAGE}}/keys/
+      - mv {{.PROJECT_NAME}}.pub {{.KEYBASE_PROJECT_PATH}}/{{.STAGE}}/keys/
+    status:
+      - test -f {{.KEYBASE_PROJECT_PATH}}/{{.STAGE}}/keys/{{.PROJECT_NAME}}
+      - test -f {{.KEYBASE_PROJECT_PATH}}/{{.STAGE}}/keys/{{.PROJECT_NAME}}.pem
+      - test -f {{.KEYBASE_PROJECT_PATH}}/{{.STAGE}}/keys/{{.PROJECT_NAME}}.pub

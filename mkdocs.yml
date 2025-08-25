@@ -15,8 +15,9 @@ extra:
   font:
     text: 'Source Sans Pro'
 
-repo_name: 'hadenlabs/pre-commit-hooks'
-repo_url: 'https://github.com/hadenlabs/pre-commit-hooks'
+repo_name: "hadenlabs/pre-commit-hooks"
+repo_url: "https://github.com/hadenlabs/pre-commit-hooks"
+copyright: 'Copyright © 2021 <a href="https://hadenlabs.com">hadenlabs</a>'
 
 google_analytics:
   - ''

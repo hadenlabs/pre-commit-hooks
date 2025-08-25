@@ -1,0 +1,24 @@
+version: "3"
+
+tasks:
+  check:
+    desc: Exist coursier and dependences
+    run: once
+    deps:
+      - task: check:coursier
+
+  check:coursier:
+    desc: Exist coursier
+    run: once
+    preconditions:
+      - sh: command -v cs
+        msg: "Please Install coursier"
+
+  setup:
+    desc: Setup coursier dependences.
+    cmds:
+      - >-
+        sudo wget -nv -O /usr/local/bin/cs https://git.io/coursier-cli
+      - sudo chmod +x /usr/local/bin/cs
+    status:
+      - test -f /usr/local/bin/cs

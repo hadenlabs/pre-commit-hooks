@@ -1,0 +1,107 @@
+version: "3"
+
+tasks:
+  check:
+    desc: Exist multipass and dependences
+    run: once
+    deps:
+      - task: check:multipass
+
+  check:multipass:
+    desc: Exist multipass
+    run: once
+    preconditions:
+      - sh: command -v multipass
+        msg: "Please Install multipass"
+
+  make:path:
+    desc: make paths
+    run: once
+    cmds:
+      - task: make:path:build
+
+  make:path:build:
+    desc: make path build
+    run: once
+    cmds:
+      - cmd: mkdir -p {{.BUILD_PATH}}
+
+  launch:
+    desc: launch multipass.
+    run: once
+    deps:
+      - task: check:multipass
+    cmds:
+      - task: make:path
+      - >-
+        multipass launch --verbose --name {{.MULTIPASS_LAUNCH_NAME}} --cloud-init {{.MULTIPASS_CLOUD_INIT_FILE}} {{.MULTIPASS_ARGS}} {{.CLI_ARGS}}
+
+  launch:k8s:master:
+    desc: launch k8s master.
+    run: once
+    cmds:
+      - task: launch
+        vars:
+          MULTIPASS_LAUNCH_NAME: k8s-master
+          MULTIPASS_CLOUD_INIT_FILE: provision/multipass/kubernetes/master.yaml
+          MULTIPASS_ARGS: -c 2 -m 2G --disk 20G
+      - cmd: multipass exec {{.MULTIPASS_LAUNCH_NAME}} -- bash -c 'sudo cat /etc/kubernetes/admin.conf' > {{.KUBECONFIG}}
+        vars:
+          MULTIPASS_LAUNCH_NAME: k8s-master
+      - cmd: echo "wait ...."
+      - cmd: sleep 50
+      - cmd: echo "now deploying calico ...."
+      - cmd: KUBECONFIG={{.KUBECONFIG}} kubectl apply -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+      - cmd: KUBECONFIG={{.KUBECONFIG}} kubectl apply -f provision/k8s/manifests/overlays/core/calico/crd.yaml
+      - cmd: KUBECONFIG={{.KUBECONFIG}} kubectl get pods -n calico-system
+      - cmd: KUBECONFIG={{.KUBECONFIG}} kubectl taint nodes --all node-role.kubernetes.io/master-
+      - cmd: KUBECONFIG={{.KUBECONFIG}} kubectl get nodes -o wide
+      - cmd: multipass exec {{.MULTIPASS_LAUNCH_NAME}} -- bash -c 'sudo kubeadm token create --print-join-command' > {{.BUILD_PATH}}/kubeadm_join.sh
+        vars:
+          MULTIPASS_LAUNCH_NAME: k8s-master
+      - cmd: echo "Now deploying the worker nodes"
+      - cmd: multipass mount {{.MOUNT_PATH_K8S_LOCAL}} {{.MULTIPASS_LAUNCH_NAME}}:/data
+    vars:
+      MULTIPASS_LAUNCH_NAME: k8s-master
+
+  launch:k8s:node:
+    desc: launch k8s nodes.
+    run: once
+    cmds:
+      - task: launch
+        vars:
+          MULTIPASS_LAUNCH_NAME: k8s-node
+          MULTIPASS_CLOUD_INIT_FILE: provision/multipass/kubernetes/node.yaml
+          MULTIPASS_ARGS: -c 2 -m 2G --disk 20G
+      - cmd: multipass transfer {{.BUILD_PATH}}/kubeadm_join.sh {{.MULTIPASS_LAUNCH_NAME}}:kubeadm_join.sh
+      - cmd: multipass exec {{.MULTIPASS_LAUNCH_NAME}} -- bash -c 'sudo chmod +x kubeadm_join.sh'
+      - cmd: multipass exec {{.MULTIPASS_LAUNCH_NAME}} -- bash -c 'sudo sh ./kubeadm_join.sh'
+      - cmd: KUBECONFIG={{.KUBECONFIG}} kubectl label node {{.MULTIPASS_LAUNCH_NAME}} node-role.kubernetes.io/node=
+      - cmd: KUBECONFIG={{.KUBECONFIG}} kubectl get nodes
+      - cmd: multipass mount {{.MOUNT_PATH_K8S_LOCAL}} {{.MULTIPASS_LAUNCH_NAME}}:/data
+    vars:
+      MULTIPASS_LAUNCH_NAME: k8s-node
+
+  make:certificates:
+    desc: make certificates and export.
+    run: once
+    deps:
+      - task: check
+    cmds:
+      - cmd: mkcert '*.k8s.local'
+      - cmd: mkdir -p {{.KEYBASE_PROJECT_PATH}}/keys/
+      - cmd: mv _wildcard.k8s.local.pem {{.KEYBASE_PROJECT_PATH}}/keys/
+      - cmd: mv _wildcard.k8s.local-key.pem {{.KEYBASE_PROJECT_PATH}}/keys/
+    status:
+      - test -f {{.KEYBASE_PROJECT_PATH}}/keys/_wildcard.k8s.local.pem
+      - test -f {{.KEYBASE_PROJECT_PATH}}/keys/_wildcard.k8s.local-key.pem
+
+  launch:traefik:
+    desc: make traefik.
+    run: once
+    deps:
+      - task: check
+    cmds:
+      - task: make:certificates
+      # - cmd: KUBECONFIG={{.KUBECONFIG}} kubectl create secret tls traefik-tls-cert --key={{.KEYBASE_PROJECT_PATH}}/keys/_wildcard.k8s.local-key.pem --cert={{.KEYBASE_PROJECT_PATH}}/keys/_wildcard.k8s.local.pem -n core
+      - cmd: KUBECONFIG={{.KUBECONFIG}} kubectl apply -f provision/k8s/manifests/overlays/core/traefik/crd.yaml
