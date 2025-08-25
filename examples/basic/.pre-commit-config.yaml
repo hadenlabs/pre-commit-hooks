@@ -109,13 +109,13 @@ repos:
           - --config=.github/linters/.golangci.yml
       - id: terraform-docs
         args:
-          - '--output-file=docs/include/terraform.md'
-          - '--output-mode=replace'
-          - '--sort-by-type'
+          - "--output-file=docs/include/terraform.md"
+          - "--output-mode=replace"
+          - "--sort-by-type"
 
       - id: terraform-tflint
         args:
-          - '--config=.github/linters/.tflint.hcl'
+          - "--config=.github/linters/.tflint.hcl"
       - id: terragrunt-fmt
       - id: terraform-fmt
       - id: terraform-tfsec
@@ -135,9 +135,9 @@ repos:
         language: system
         entry: ./node_modules/prettier/bin-prettier.js
         args:
-          - '--write=true'
-          - '--config=.github/linters/prettier.config.js'
-          - '--ignore-path=.github/linters/.prettierignore'
+          - "--write=true"
+          - "--config=.github/linters/prettier.config.js"
+          - "--ignore-path=.github/linters/.prettierignore"
         files: \.(js|jsx|json|ts|tsx|mjs|d.ts|md|yml|yaml|gql|graphql|mjml)$
         exclude: node_modules
       - id: eslint
@@ -145,10 +145,10 @@ repos:
         language: node
         entry: node_modules/eslint/bin/eslint.js
         args:
-          - '--fix'
-          - '--color'
-          - '--config=.github/linters/.eslintrc.js'
-          - '--ignore-path=.github/linters/.eslintignore'
+          - "--fix"
+          - "--color"
+          - "--config=.github/linters/.eslintrc.js"
+          - "--ignore-path=.github/linters/.eslintignore"
         files: \.(js|jsx|ts|tsx|mjs|d.ts)$
         exclude: node_modules
       - id: stylint

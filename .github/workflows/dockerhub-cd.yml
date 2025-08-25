@@ -3,20 +3,20 @@ name: cd
 
 on:
   workflow_run:
-    workflows: ['test']
+    workflows: ["test"]
     types:
       - completed
 
   push:
     tags:
-      - '[0-9]+.[0-9]+.[0-9]+'
+      - "[0-9]+.[0-9]+.[0-9]+"
       # https://semver.org/ proper release tags, more or less
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - "v[0-9]+.[0-9]+.[0-9]+"
       # prerelease tags, more or less
-      - 'v[0-9]+.[0-9]+.[0-9]+-*'
+      - "v[0-9]+.[0-9]+.[0-9]+-*"
 
 env:
-  IMAGE_NAME: 'hadenlabs/pre-commit-hooks'
+  IMAGE_NAME: "hadenlabs/pre-commit-hooks"
 
 jobs:
   docker:
@@ -28,8 +28,8 @@ jobs:
       - id: get_version
         uses: battila7/get-version-action@v2
 
-      -  name: set vars to github
-         run: |
+      - name: set vars to github
+        run: |
           echo "APP_TAG=${{ steps.get_version.outputs.version-without-v }}" >> $GITHUB_ENV
 
       - name: set up qemu

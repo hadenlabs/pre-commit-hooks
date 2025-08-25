@@ -14,7 +14,7 @@ email:
 #logo: docs/logo.png
 
 # License of this project
-license: 'LGPL-3.0'
+license: "LGPL-3.0"
 
 # Canonical GitHub repo
 github_repo: hadenlabs/pre-commit-hooks
@@ -49,12 +49,12 @@ description: |-
   [pre-commit](https://pre-commit.com/) framework.
 
 features:
-  - '[Terraform](https://github.com/terraform-linters/tflint)'
-  - '[TodoCheck](https://github.com/preslavmihaylov/todocheck)'
-  - '[Go](https://golang.org)'
-  - '[Markdown](https://github.com/tcort/markdown-link-check)'
-  - '[Shellcheck](https://github.com/koalaman/shellcheck)'
-  - '[Hadolint](https://github.com/hadolint/hadolint)'
+  - "[Terraform](https://github.com/terraform-linters/tflint)"
+  - "[TodoCheck](https://github.com/preslavmihaylov/todocheck)"
+  - "[Go](https://golang.org)"
+  - "[Markdown](https://github.com/tcort/markdown-link-check)"
+  - "[Shellcheck](https://github.com/koalaman/shellcheck)"
+  - "[Hadolint](https://github.com/hadolint/hadolint)"
 
 installation:
   - docs/installation/base.md
@@ -62,30 +62,11 @@ installation:
   - docs/installation/linux.md
 
 todo:
-  - name: 'chore: implement hook gnu make'
-    url: 'https://github.com/hadenlabs/pre-commit-hooks/issues/2'
+  - name: "chore: implement hook gnu make"
+    url: "https://github.com/hadenlabs/pre-commit-hooks/issues/2"
 
-# How to use this project
-usage: |-
-
-  Create a `.pre-commit-config.yaml` inside your repositories and add the desired list of hooks.
-  Please see the [documentation](https://pre-commit.com/#usage) for further information.
-
-
-  ```yaml
-    repos:
-      - repo: https://github.com/hadenlabs/pre-commit-hooks
-        rev: 0.3.0
-        hooks:
-          - id: terraform-fmt
-          - id: terraform-validate
-          - id: markdown-link-check
-          - id: go-fmt
-
-  ```
-
-  Once you created the configuration file inside your repository, you must run `pre-commit install` to activate the hooks.
-  That's it, pre-commit will now listen for changes in your files and run the checks accordingly.
+usages:
+  - docs/usage.md
 
 examples:
-  - 'docs/examples/common.md'
+  - "docs/examples/common.md"

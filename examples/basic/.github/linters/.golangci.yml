@@ -19,7 +19,7 @@ linters-settings:
   golint:
     min-confidence: 0
   linters-settings.misspell:
-    locale: 'US'
+    locale: "US"
     ignore-words:
       - cancelling
   goconst:
