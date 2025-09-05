@@ -340,3 +340,13 @@
   stages: [prepare-commit-msg]
   minimum_pre_commit_version: 0.15.0
   pass_filenames: false
+
+# ktlint
+
+- id: ktlint
+  name: ktlint
+  description: Check Kotlin code style
+  entry: ./gradlew ktlintCheck
+  language: system
+  files: \.kt$
+  pass_filenames: false
