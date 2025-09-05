@@ -236,6 +236,16 @@ repos:
         args: ["--ext", ".key", "--ext", ".crt"]
 ```
 
+### ktlint:
+
+```yaml
+repos:
+  - repo: https://github.com/hadenlabs/pre-commit-hooks
+    rev: 0.5.0
+    hooks:
+      - id: ktlint
+```
+
 ## Help
 
 ### Got a question?
