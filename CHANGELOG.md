@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file. This file uses change log convention from [keep a CHANGELOG](http://keepachangelog.com/en/0.3.0/).
 
 
+<a name="0.6.0"></a>
+## [0.6.0](https://github.com/hadenlabs/pre-commit-hooks/compare/0.5.0...0.6.0)
+
+> 2025-09-05
+
+### ✨ Features
+
+* implement hook ktlint ([#86](https://github.com/hadenlabs/pre-commit-hooks/issues/86))
+
+
 <a name="0.5.0"></a>
 ## [0.5.0](https://github.com/hadenlabs/pre-commit-hooks/compare/0.4.0...0.5.0)
 
